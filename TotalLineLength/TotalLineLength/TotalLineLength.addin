@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Text>Command TotalLineLength</Text>
+    <Description>Some description for TotalLineLength</Description>
+    <Assembly>TotalLineLength.dll</Assembly>
+    <FullClassName>TotalLineLength.Command</FullClassName>
+    <ClientId>b4b879d6-1368-4d34-a744-7096f8577a82</ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+  <AddIn Type="Application">
+    <Name>Application TotalLineLength</Name>
+    <Assembly>TotalLineLength.dll</Assembly>
+    <FullClassName>TotalLineLength.App</FullClassName>
+    <ClientId>5c980316-d561-494b-93e9-a2086fe3c437</ClientId>
+    <VendorId>com.typepad.thebuildingcoder</VendorId>
+    <VendorDescription>The Building Coder, http://thebuildingcoder.typepad.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>
