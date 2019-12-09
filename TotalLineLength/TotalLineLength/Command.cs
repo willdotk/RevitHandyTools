@@ -12,7 +12,7 @@ using Autodesk.Revit.UI.Selection;
 namespace TotalLineLength
 {
     [Transaction(TransactionMode.Manual)]
-    public class TotalLineLength : IExternalCommand
+    public class Command : IExternalCommand
     {
         const double InchToMm = 25.4;
         const double FootToMm = 12 * InchToMm;

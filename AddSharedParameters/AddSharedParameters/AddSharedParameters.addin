@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Command">
+    <Text>Command AddSharedParameters</Text>
+    <Description>Some description for AddSharedParameters</Description>
+    <Assembly>AddSharedParameters.dll</Assembly>
+    <FullClassName>AddSharedParameters.Command</FullClassName>
+    <ClientId>675dea5b-3701-48ae-aa5f-c6fb64555d12</ClientId>
+    <VendorId>archipy</VendorId>
+    <VendorDescription>archipy</VendorDescription>
+  </AddIn>
+  <AddIn Type="Application">
+    <Name>Application AddSharedParameters</Name>
+    <Assembly>AddSharedParameters.dll</Assembly>
+    <FullClassName>AddSharedParameters.App</FullClassName>
+    <ClientId>32009a2f-af2d-4ef3-8ee7-fd5d92513d54</ClientId>
+    <VendorId>archipy</VendorId>
+    <VendorDescription>archipy</VendorDescription>
+  </AddIn>
+</RevitAddIns>
