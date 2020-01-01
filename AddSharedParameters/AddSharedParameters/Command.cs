@@ -12,6 +12,7 @@ using Autodesk.Revit.UI.Selection;
 namespace AddSharedParameters
 {
     [Transaction(TransactionMode.Manual)]
+
     public class Command : IExternalCommand
     {
         public Result Execute(
@@ -24,23 +25,27 @@ namespace AddSharedParameters
             Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
-            System.Text.StringBuilder fileinfo = new System.Text.StringBuilder();
+            System.Text.StringBuilder paramName = new System.Text.StringBuilder();
+            System.Text.StringBuilder paramGroup = new System.Text.StringBuilder();
 
             DefinitionFile definitionfile = app.OpenSharedParameterFile();
 
-            fileinfo.AppendLine("File Name: " + definitionfile.Filename);
+            paramName.AppendLine("File Name: " + definitionfile.Filename);
 
             foreach (DefinitionGroup definitionGroup in definitionfile.Groups)
             {
-                fileinfo.AppendLine("Group Name: " + definitionGroup.Name);
+                paramGroup.AppendLine("Group Name: " + definitionGroup.Name);
 
                 foreach (Definition definition in definitionGroup.Definitions)
                 {
-                    fileinfo.AppendLine("Parameter Name: " + definition.Name);
+                    paramName.AppendLine("Parameter Name: " + definition.Name);
                 }
             }
 
-            TaskDialog.Show("Shared Parameter", fileinfo.ToString());
+
+            SharedParameterForm addingForm = new SharedParameterForm();
+            addingForm.Show();
+            
 
             return Result.Succeeded;
         }
