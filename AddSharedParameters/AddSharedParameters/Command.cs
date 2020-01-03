@@ -25,25 +25,19 @@ namespace AddSharedParameters
             Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
-            System.Text.StringBuilder paramName = new System.Text.StringBuilder();
-            System.Text.StringBuilder paramGroup = new System.Text.StringBuilder();
-
             DefinitionFile definitionfile = app.OpenSharedParameterFile();
-
-            paramName.AppendLine("File Name: " + definitionfile.Filename);
-
+            List<string> paramGroup = new List<string>();
+            List<string> paramNames = new List<string>();
             foreach (DefinitionGroup definitionGroup in definitionfile.Groups)
             {
-                paramGroup.AppendLine("Group Name: " + definitionGroup.Name);
-
+                paramGroup.Add(definitionGroup.Name.ToString());
                 foreach (Definition definition in definitionGroup.Definitions)
                 {
-                    paramName.AppendLine("Parameter Name: " + definition.Name);
+                    paramNames.Add(definition.Name.ToString());
                 }
             }
 
-
-            SharedParameterForm addingForm = new SharedParameterForm();
+            SharedParameterForm addingForm = new SharedParameterForm(paramGroup, paramNames);
             addingForm.Show();
             
 

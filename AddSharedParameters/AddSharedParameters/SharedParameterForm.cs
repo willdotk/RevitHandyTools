@@ -12,15 +12,34 @@ namespace AddSharedParameters
 {
     public partial class SharedParameterForm : Form
     {
-        public SharedParameterForm()
+        public SharedParameterForm(List<string> lst1, List<string> lst2)
         {
             InitializeComponent();
-            string[] name = new string[] { "item test 1", "item test 2", "item test 3" };
-            checkedListBox1.Items.AddRange(name);
+            comboBox1.Items.AddRange(lst1.ToArray());
+            //checkedListBox1.Items.AddRange(lst2.ToArray());
+
         }
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (Object item in checkedListBox1.CheckedItems)
+            {
+                listBox1.Items.Add(item);
+            }
         }
     }
 }
