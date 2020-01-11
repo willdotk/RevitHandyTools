@@ -7,22 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Autodesk.Revit.DB;
+using Autodesk.Revit.UI;
+using Autodesk.Revit.ApplicationServices;
+
 
 namespace AddSharedParameters
 {
-    public partial class SharedParameterForm : Form
+    public partial class SharedParameterForm : System.Windows.Forms.Form
     {
         public SharedParameterForm(List<string> lst1, List<string> lst2)
         {
             InitializeComponent();
-            comboBox1.Items.AddRange(lst1.ToArray());
-            //checkedListBox1.Items.AddRange(lst2.ToArray());
 
-        }
+            GroupSelection.Items.AddRange(lst1.ToArray());
+            ParameterList.Items.AddRange(lst2.ToArray());
 
-        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -33,13 +34,9 @@ namespace AddSharedParameters
         {
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void AddButton_Click(object sender, EventArgs e)
         {
-            foreach (Object item in checkedListBox1.CheckedItems)
-            {
-                listBox1.Items.Add(item);
-            }
+            
         }
     }
 }

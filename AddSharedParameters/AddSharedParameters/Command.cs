@@ -15,6 +15,11 @@ namespace AddSharedParameters
 
     public class Command : IExternalCommand
     {
+        public static void CreateProjectParameter()
+        {
+
+        }
+
         public Result Execute(
           ExternalCommandData commandData,
           ref string message,
@@ -26,8 +31,10 @@ namespace AddSharedParameters
             Document doc = uidoc.Document;
 
             DefinitionFile definitionfile = app.OpenSharedParameterFile();
+            
             List<string> paramGroup = new List<string>();
             List<string> paramNames = new List<string>();
+
             foreach (DefinitionGroup definitionGroup in definitionfile.Groups)
             {
                 paramGroup.Add(definitionGroup.Name.ToString());
@@ -36,6 +43,12 @@ namespace AddSharedParameters
                     paramNames.Add(definition.Name.ToString());
                 }
             }
+
+
+            FilteredElementCollector colWalls = new FilteredElementCollector(doc);
+            colWalls.OfCategory(BuiltInCategory.OST_Walls);
+
+            Autodesk.Revit.DB.Binding binding = app.Create.NewTypeBinding();
 
             SharedParameterForm addingForm = new SharedParameterForm(paramGroup, paramNames);
             addingForm.Show();

@@ -54,7 +54,7 @@ namespace TotalLineLength
                 count++;
             }
 
-            string lengthtotwodecimal = String.Format("{0:0.##}", totallength);
+            string lengthtotwodecimal = String.Format("{0:#.##}", totallength);
             string outcome = String.Format("The number of Lines: {0} \nTotal length: {1}mm ", count, lengthtotwodecimal);
 
             TaskDialog.Show("Total length", outcome);
