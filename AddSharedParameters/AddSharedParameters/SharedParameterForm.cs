@@ -16,14 +16,40 @@ namespace AddSharedParameters
 {
     public partial class SharedParameterForm : System.Windows.Forms.Form
     {
-        public SharedParameterForm(List<string> lst1, List<string> lst2)
+        private UIApplication uiapp = null;
+        private Autodesk.Revit.ApplicationServices.Application app = null;
+        
+        //public SharedParameterForm(List<string> lst1, List<string> lst2)
+        public SharedParameterForm(ExternalCommandData commandData)
         {
             InitializeComponent();
 
-            GroupSelection.Items.AddRange(lst1.ToArray());
-            ParameterList.Items.AddRange(lst2.ToArray());
+            uiapp = commandData.Application;
+            app = uiapp.Application;
 
 
+
+            GroupSelection.Items.AddRange(GetGroupList().ToArray());
+            //ParameterList.Items.AddRange(lst2.ToArray());
+        }
+
+        private List<string> GetGroupList()
+        {
+            DefinitionFile definitionfile = app.OpenSharedParameterFile();
+
+            List<string> paramGroup = new List<string>();
+            List<string> paramNames = new List<string>();
+
+            foreach (DefinitionGroup definitionGroup in definitionfile.Groups)
+            {
+                paramGroup.Add(definitionGroup.Name.ToString());
+                foreach (Definition definition in definitionGroup.Definitions)
+                {
+                    paramNames.Add(definition.Name.ToString());
+                }
+            }
+
+            return paramGroup;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

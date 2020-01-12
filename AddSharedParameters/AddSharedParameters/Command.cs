@@ -30,6 +30,7 @@ namespace AddSharedParameters
             Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
+            /*
             DefinitionFile definitionfile = app.OpenSharedParameterFile();
             
             List<string> paramGroup = new List<string>();
@@ -49,8 +50,9 @@ namespace AddSharedParameters
             colWalls.OfCategory(BuiltInCategory.OST_Walls);
 
             Autodesk.Revit.DB.Binding binding = app.Create.NewTypeBinding();
-
-            SharedParameterForm addingForm = new SharedParameterForm(paramGroup, paramNames);
+            */
+            //SharedParameterForm addingForm = new SharedParameterForm(paramGroup, paramNames);
+            SharedParameterForm addingForm = new SharedParameterForm(commandData);
             addingForm.Show();
             
 
