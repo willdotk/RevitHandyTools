@@ -20,7 +20,8 @@ namespace AddSharedParameters
         private UIApplication uiapp = null;
         private Autodesk.Revit.ApplicationServices.Application app = null;
         private DefinitionFile definitionfile = null;
-
+        private Object SelectedGroup = null;
+        
         public SharedParameterForm(ExternalCommandData commandData)
         {
             InitializeComponent();
@@ -29,9 +30,9 @@ namespace AddSharedParameters
             app = uiapp.Application;
             definitionfile = app.OpenSharedParameterFile();
 
-            GroupSelection.Items.AddRange(GetSharedParamDict().Values.Distinct().ToList().ToArray());
-            ParameterList.Items.AddRange(GetSharedParamDict().Keys.ToList().ToArray());
-            
+            GroupSelectComboBox.Items.AddRange(GetSharedParamDict().Values.Distinct().ToList().ToArray());
+            //ParameterList.Items.AddRange(GetSharedParamDict().Keys.ToList().ToArray());
+
         }
 
         private Dictionary<string, string> GetSharedParamDict()
@@ -53,17 +54,30 @@ namespace AddSharedParameters
             return paramDict;
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void ParameterList_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
         private void AddButton_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void GroupSelectComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ParameterList.Items.Clear();
+            SelectedGroup = GroupSelectComboBox.SelectedItem;
+            string selGroup = SelectedGroup.ToString();
+            List<string> selParamList = new List<string>();
+
+            foreach (KeyValuePair<string, string> v in GetSharedParamDict())
+            {
+                if (v.Value == selGroup)
+                {
+                    ParameterList.Items.Add(v.Key);
+                }
+            }
         }
     }
 }
