@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -17,22 +15,16 @@ namespace AddSharedParameters
 {
     public partial class SharedParameterForm : System.Windows.Forms.Form
     {
-        private UIApplication uiapp = null;
-        private Autodesk.Revit.ApplicationServices.Application app = null;
         private DefinitionFile definitionfile = null;
         private Object SelectedGroup = null;
         
-        public SharedParameterForm(ExternalCommandData commandData)
+        public SharedParameterForm(Autodesk.Revit.ApplicationServices.Application app)
         {
             InitializeComponent();
 
-            uiapp = commandData.Application;
-            app = uiapp.Application;
             definitionfile = app.OpenSharedParameterFile();
 
             GroupSelectComboBox.Items.AddRange(GetSharedParamDict().Values.Distinct().ToList().ToArray());
-            //ParameterList.Items.AddRange(GetSharedParamDict().Keys.ToList().ToArray());
-
         }
 
         private Dictionary<string, string> GetSharedParamDict()
@@ -69,7 +61,6 @@ namespace AddSharedParameters
             ParameterList.Items.Clear();
             SelectedGroup = GroupSelectComboBox.SelectedItem;
             string selGroup = SelectedGroup.ToString();
-            List<string> selParamList = new List<string>();
 
             foreach (KeyValuePair<string, string> v in GetSharedParamDict())
             {
