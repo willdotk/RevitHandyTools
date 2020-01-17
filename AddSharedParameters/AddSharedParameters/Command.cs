@@ -25,7 +25,7 @@ namespace AddSharedParameters
             Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
-            SharedParameterForm addingForm = new SharedParameterForm(app);
+            SharedParameterForm addingForm = new SharedParameterForm(doc,app);
             addingForm.Show();
             
             

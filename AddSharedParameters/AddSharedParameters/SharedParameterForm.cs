@@ -17,8 +17,8 @@ namespace AddSharedParameters
     {
         private DefinitionFile definitionfile = null;
         private Object SelectedGroup = null;
-        
-        public SharedParameterForm(Autodesk.Revit.ApplicationServices.Application app)
+
+        public SharedParameterForm(Document doc, Autodesk.Revit.ApplicationServices.Application app)
         {
             InitializeComponent();
 
@@ -26,6 +26,7 @@ namespace AddSharedParameters
 
             GroupSelectComboBox.Items.AddRange(GetSharedParamDict().Values.Distinct().ToList().ToArray());
             ParameterList.Items.Add("Please select a group.");
+            CategoryCheckList.Items.AddRange(ParameterCategoryList(doc).Keys.ToList().ToArray());
         }
 
         private Dictionary<string, string> GetSharedParamDict()
@@ -47,6 +48,21 @@ namespace AddSharedParameters
             return paramDict;
         }
 
+        private SortedList<string, Category> ParameterCategoryList(Document doc)
+        {
+            Categories categories = doc.Settings.Categories;
+            
+            SortedList<string, Category> categoryList = new SortedList<string, Category>();
+
+            foreach(Category cat in categories)
+            {
+                if (cat.AllowsBoundParameters)
+                {
+                    categoryList.Add(cat.Name, cat);
+                }
+            }
+            return categoryList;
+        }
 
         private void ParameterList_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -70,6 +86,11 @@ namespace AddSharedParameters
                     ParameterList.Items.Add(v.Key);
                 }
             }
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

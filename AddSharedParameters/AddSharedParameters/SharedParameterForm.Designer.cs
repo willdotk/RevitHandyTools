@@ -31,12 +31,13 @@
             this.ParameterList = new System.Windows.Forms.ListBox();
             this.AddButton = new System.Windows.Forms.Button();
             this.GroupSelectComboBox = new System.Windows.Forms.ComboBox();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.CategoryCheckList = new System.Windows.Forms.CheckedListBox();
             this.SharedParameterGroup = new System.Windows.Forms.GroupBox();
             this.SharedParameterList = new System.Windows.Forms.GroupBox();
             this.CategoryList = new System.Windows.Forms.GroupBox();
             this.GroupParameterUnder = new System.Windows.Forms.GroupBox();
-            this.GroupParameterComboBox = new System.Windows.Forms.ComboBox();
+            this.GroupParameterUnderComboBox = new System.Windows.Forms.ComboBox();
+            this.CancelButton = new System.Windows.Forms.Button();
             this.SharedParameterGroup.SuspendLayout();
             this.SharedParameterList.SuspendLayout();
             this.CategoryList.SuspendLayout();
@@ -62,7 +63,7 @@
             // AddButton
             // 
             this.AddButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddButton.Location = new System.Drawing.Point(475, 539);
+            this.AddButton.Location = new System.Drawing.Point(302, 539);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(171, 30);
             this.AddButton.TabIndex = 4;
@@ -82,16 +83,16 @@
             this.GroupSelectComboBox.TabIndex = 5;
             this.GroupSelectComboBox.SelectedIndexChanged += new System.EventHandler(this.GroupSelectComboBox_SelectedIndexChanged);
             // 
-            // checkedListBox1
+            // CategoryCheckList
             // 
-            this.checkedListBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.HorizontalScrollbar = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(20, 32);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.checkedListBox1.Size = new System.Drawing.Size(272, 361);
-            this.checkedListBox1.TabIndex = 7;
+            this.CategoryCheckList.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CategoryCheckList.FormattingEnabled = true;
+            this.CategoryCheckList.HorizontalScrollbar = true;
+            this.CategoryCheckList.Location = new System.Drawing.Point(20, 32);
+            this.CategoryCheckList.Name = "CategoryCheckList";
+            this.CategoryCheckList.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.CategoryCheckList.Size = new System.Drawing.Size(272, 361);
+            this.CategoryCheckList.TabIndex = 7;
             // 
             // SharedParameterGroup
             // 
@@ -117,7 +118,7 @@
             // 
             // CategoryList
             // 
-            this.CategoryList.Controls.Add(this.checkedListBox1);
+            this.CategoryList.Controls.Add(this.CategoryCheckList);
             this.CategoryList.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CategoryList.Location = new System.Drawing.Point(339, 106);
             this.CategoryList.Name = "CategoryList";
@@ -128,7 +129,7 @@
             // 
             // GroupParameterUnder
             // 
-            this.GroupParameterUnder.Controls.Add(this.GroupParameterComboBox);
+            this.GroupParameterUnder.Controls.Add(this.GroupParameterUnderComboBox);
             this.GroupParameterUnder.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GroupParameterUnder.Location = new System.Drawing.Point(339, 21);
             this.GroupParameterUnder.Name = "GroupParameterUnder";
@@ -137,28 +138,40 @@
             this.GroupParameterUnder.TabStop = false;
             this.GroupParameterUnder.Text = "Group Parameter Under";
             // 
-            // GroupParameterComboBox
+            // GroupParameterUnderComboBox
             // 
-            this.GroupParameterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.GroupParameterComboBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GroupParameterComboBox.FormattingEnabled = true;
-            this.GroupParameterComboBox.Location = new System.Drawing.Point(19, 31);
-            this.GroupParameterComboBox.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
-            this.GroupParameterComboBox.Name = "GroupParameterComboBox";
-            this.GroupParameterComboBox.Size = new System.Drawing.Size(273, 26);
-            this.GroupParameterComboBox.TabIndex = 5;
-            this.GroupParameterComboBox.SelectedIndexChanged += new System.EventHandler(this.GroupSelectComboBox_SelectedIndexChanged);
+            this.GroupParameterUnderComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.GroupParameterUnderComboBox.FormattingEnabled = true;
+            this.GroupParameterUnderComboBox.Location = new System.Drawing.Point(20, 31);
+            this.GroupParameterUnderComboBox.Name = "GroupParameterUnderComboBox";
+            this.GroupParameterUnderComboBox.Size = new System.Drawing.Size(271, 26);
+            this.GroupParameterUnderComboBox.TabIndex = 0;
+            // 
+            // CancelButton
+            // 
+            this.CancelButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CancelButton.Location = new System.Drawing.Point(488, 539);
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.Size = new System.Drawing.Size(142, 29);
+            this.CancelButton.TabIndex = 13;
+            this.CancelButton.Text = "Cancel";
+            this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // SharedParameterForm
             // 
+            this.AcceptButton = this.AddButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.CancelButton;
             this.ClientSize = new System.Drawing.Size(659, 581);
+            this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.GroupParameterUnder);
             this.Controls.Add(this.CategoryList);
             this.Controls.Add(this.SharedParameterList);
             this.Controls.Add(this.SharedParameterGroup);
             this.Controls.Add(this.AddButton);
+            this.KeyPreview = true;
             this.Name = "SharedParameterForm";
             this.Text = "SharedParameterForm";
             this.TopMost = true;
@@ -174,11 +187,12 @@
         private System.Windows.Forms.ListBox ParameterList;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.ComboBox GroupSelectComboBox;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox CategoryCheckList;
         private System.Windows.Forms.GroupBox SharedParameterGroup;
         private System.Windows.Forms.GroupBox SharedParameterList;
         private System.Windows.Forms.GroupBox CategoryList;
         private System.Windows.Forms.GroupBox GroupParameterUnder;
-        private System.Windows.Forms.ComboBox GroupParameterComboBox;
+        private System.Windows.Forms.ComboBox GroupParameterUnderComboBox;
+        private System.Windows.Forms.Button CancelButton;
     }
 }
