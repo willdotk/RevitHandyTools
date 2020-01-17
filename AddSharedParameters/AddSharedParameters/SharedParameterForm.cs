@@ -25,6 +25,7 @@ namespace AddSharedParameters
             definitionfile = app.OpenSharedParameterFile();
 
             GroupSelectComboBox.Items.AddRange(GetSharedParamDict().Values.Distinct().ToList().ToArray());
+            ParameterList.Items.Add("Please select a group.");
         }
 
         private Dictionary<string, string> GetSharedParamDict()

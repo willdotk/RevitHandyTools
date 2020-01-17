@@ -31,28 +31,40 @@
             this.ParameterList = new System.Windows.Forms.ListBox();
             this.AddButton = new System.Windows.Forms.Button();
             this.GroupSelectComboBox = new System.Windows.Forms.ComboBox();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.SharedParameterGroup = new System.Windows.Forms.GroupBox();
+            this.SharedParameterList = new System.Windows.Forms.GroupBox();
+            this.CategoryList = new System.Windows.Forms.GroupBox();
+            this.GroupParameterUnder = new System.Windows.Forms.GroupBox();
+            this.GroupParameterComboBox = new System.Windows.Forms.ComboBox();
+            this.SharedParameterGroup.SuspendLayout();
+            this.SharedParameterList.SuspendLayout();
+            this.CategoryList.SuspendLayout();
+            this.GroupParameterUnder.SuspendLayout();
             this.SuspendLayout();
             // 
             // ParameterList
             // 
-            this.ParameterList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ParameterList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParameterList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.ParameterList.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParameterList.FormattingEnabled = true;
-            this.ParameterList.ItemHeight = 20;
-            this.ParameterList.Location = new System.Drawing.Point(12, 75);
+            this.ParameterList.HorizontalScrollbar = true;
+            this.ParameterList.ItemHeight = 18;
+            this.ParameterList.Location = new System.Drawing.Point(16, 32);
             this.ParameterList.Name = "ParameterList";
+            this.ParameterList.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ParameterList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.ParameterList.Size = new System.Drawing.Size(298, 364);
+            this.ParameterList.Size = new System.Drawing.Size(280, 364);
             this.ParameterList.TabIndex = 2;
             this.ParameterList.SelectedIndexChanged += new System.EventHandler(this.ParameterList_SelectedIndexChanged);
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(202, 448);
+            this.AddButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddButton.Location = new System.Drawing.Point(475, 539);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(108, 30);
+            this.AddButton.Size = new System.Drawing.Size(171, 30);
             this.AddButton.TabIndex = 4;
             this.AddButton.Text = "Add Parameter";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -60,28 +72,100 @@
             // 
             // GroupSelectComboBox
             // 
-            this.GroupSelectComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.GroupSelectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.GroupSelectComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GroupSelectComboBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GroupSelectComboBox.FormattingEnabled = true;
-            this.GroupSelectComboBox.Location = new System.Drawing.Point(161, 29);
+            this.GroupSelectComboBox.Location = new System.Drawing.Point(16, 31);
+            this.GroupSelectComboBox.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
             this.GroupSelectComboBox.Name = "GroupSelectComboBox";
-            this.GroupSelectComboBox.Size = new System.Drawing.Size(149, 28);
+            this.GroupSelectComboBox.Size = new System.Drawing.Size(276, 26);
             this.GroupSelectComboBox.TabIndex = 5;
             this.GroupSelectComboBox.SelectedIndexChanged += new System.EventHandler(this.GroupSelectComboBox_SelectedIndexChanged);
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.HorizontalScrollbar = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(20, 32);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.checkedListBox1.Size = new System.Drawing.Size(272, 361);
+            this.checkedListBox1.TabIndex = 7;
+            // 
+            // SharedParameterGroup
+            // 
+            this.SharedParameterGroup.Controls.Add(this.GroupSelectComboBox);
+            this.SharedParameterGroup.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SharedParameterGroup.Location = new System.Drawing.Point(11, 21);
+            this.SharedParameterGroup.Name = "SharedParameterGroup";
+            this.SharedParameterGroup.Size = new System.Drawing.Size(311, 71);
+            this.SharedParameterGroup.TabIndex = 9;
+            this.SharedParameterGroup.TabStop = false;
+            this.SharedParameterGroup.Text = "Select Shared Parameter Group";
+            // 
+            // SharedParameterList
+            // 
+            this.SharedParameterList.Controls.Add(this.ParameterList);
+            this.SharedParameterList.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SharedParameterList.Location = new System.Drawing.Point(11, 106);
+            this.SharedParameterList.Name = "SharedParameterList";
+            this.SharedParameterList.Size = new System.Drawing.Size(311, 418);
+            this.SharedParameterList.TabIndex = 10;
+            this.SharedParameterList.TabStop = false;
+            this.SharedParameterList.Text = "Shared Parameter List";
+            // 
+            // CategoryList
+            // 
+            this.CategoryList.Controls.Add(this.checkedListBox1);
+            this.CategoryList.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CategoryList.Location = new System.Drawing.Point(339, 106);
+            this.CategoryList.Name = "CategoryList";
+            this.CategoryList.Size = new System.Drawing.Size(307, 417);
+            this.CategoryList.TabIndex = 11;
+            this.CategoryList.TabStop = false;
+            this.CategoryList.Text = "Category List";
+            // 
+            // GroupParameterUnder
+            // 
+            this.GroupParameterUnder.Controls.Add(this.GroupParameterComboBox);
+            this.GroupParameterUnder.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GroupParameterUnder.Location = new System.Drawing.Point(339, 21);
+            this.GroupParameterUnder.Name = "GroupParameterUnder";
+            this.GroupParameterUnder.Size = new System.Drawing.Size(307, 70);
+            this.GroupParameterUnder.TabIndex = 12;
+            this.GroupParameterUnder.TabStop = false;
+            this.GroupParameterUnder.Text = "Group Parameter Under";
+            // 
+            // GroupParameterComboBox
+            // 
+            this.GroupParameterComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.GroupParameterComboBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GroupParameterComboBox.FormattingEnabled = true;
+            this.GroupParameterComboBox.Location = new System.Drawing.Point(19, 31);
+            this.GroupParameterComboBox.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
+            this.GroupParameterComboBox.Name = "GroupParameterComboBox";
+            this.GroupParameterComboBox.Size = new System.Drawing.Size(273, 26);
+            this.GroupParameterComboBox.TabIndex = 5;
+            this.GroupParameterComboBox.SelectedIndexChanged += new System.EventHandler(this.GroupSelectComboBox_SelectedIndexChanged);
             // 
             // SharedParameterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 490);
-            this.Controls.Add(this.GroupSelectComboBox);
+            this.ClientSize = new System.Drawing.Size(659, 581);
+            this.Controls.Add(this.GroupParameterUnder);
+            this.Controls.Add(this.CategoryList);
+            this.Controls.Add(this.SharedParameterList);
+            this.Controls.Add(this.SharedParameterGroup);
             this.Controls.Add(this.AddButton);
-            this.Controls.Add(this.ParameterList);
             this.Name = "SharedParameterForm";
             this.Text = "SharedParameterForm";
             this.TopMost = true;
+            this.SharedParameterGroup.ResumeLayout(false);
+            this.SharedParameterList.ResumeLayout(false);
+            this.CategoryList.ResumeLayout(false);
+            this.GroupParameterUnder.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -90,5 +174,11 @@
         private System.Windows.Forms.ListBox ParameterList;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.ComboBox GroupSelectComboBox;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.GroupBox SharedParameterGroup;
+        private System.Windows.Forms.GroupBox SharedParameterList;
+        private System.Windows.Forms.GroupBox CategoryList;
+        private System.Windows.Forms.GroupBox GroupParameterUnder;
+        private System.Windows.Forms.ComboBox GroupParameterComboBox;
     }
 }
