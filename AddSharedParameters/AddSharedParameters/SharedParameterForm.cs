@@ -20,16 +20,21 @@ namespace AddSharedParameters
         private DefinitionFile definitionfile = null;
         private Object SelectedGroup = null;
 
-        public SharedParameterForm(Document doc, Autodesk.Revit.ApplicationServices.Application app)
+        private Autodesk.Revit.ApplicationServices.Application app = null;
+        private Document doc = null;
+
+        public SharedParameterForm(Document dOcument, Autodesk.Revit.ApplicationServices.Application aPplication)
         {
             InitializeComponent();
+
+            app = aPplication;
+            doc = dOcument;
 
             definitionfile = app.OpenSharedParameterFile();
 
             GroupSelectComboBox.Items.AddRange(GetGroupListFromDict().ToArray());
-            //GroupSelectComboBox.Items.AddRange(GetSharedParamDict().Values.Distinct().ToList().ToArray());
             ParameterList.Items.Add("Please select a group.");
-            GroupParameterUnderComboBox.Items.AddRange(ParameterGroupUnderList(doc).Keys.ToArray());
+            GroupParameterUnderComboBox.Items.AddRange(ParameterGroupUnderDict(doc).Keys.ToArray());
             CategoryCheckList.Items.AddRange(ParameterCategoryList(doc).Keys.ToList().ToArray());
         }
 
@@ -72,51 +77,6 @@ namespace AddSharedParameters
             return lst;
         }
 
-        /*
-        private Dictionary<string, string> GetSharedParamDict()
-        {
-            Dictionary<string, string> paramDict = new Dictionary<string, string>();
-
-            foreach (DefinitionGroup definitionGroup in definitionfile.Groups)
-            {
-                string deGroupName = definitionGroup.Name;
-                foreach (Definition definition in definitionGroup.Definitions)
-                {
-                    string deParamName = definition.Name;
-                    if (!paramDict.ContainsKey(deParamName))
-                    {
-                        paramDict.Add(deParamName, deGroupName);
-                    }
-                }
-            }
-            return paramDict;
-        }
-        */
-        /*
-        private Dictionary<string, string> GetSharedParamDictExternalDefinition()
-        {
-            Dictionary<string, string> paramDict = new Dictionary<string, string>();
-
-            DefinitionGroup definitionGroup = definitionfile.Groups.get_Item(GroupSelectComboBox.SelectedItem.ToString());
-
-            foreach(Definition de in definitionGroup.Definitions)
-            {
-                foreach (string pn in ParameterList.SelectedItems)
-                {
-                    Definition deSelected = null;
-                    if(deSelected.Name == pn)
-                    {
-                        
-                    }
-                    ExternalDefinition exParamName = 
-                }
-            }
-            
-
-
-            return paramDict;
-        }
-        */
         private SortedList<string, Category> ParameterCategoryList(Document doc)
         {
             Categories categories = doc.Settings.Categories;
@@ -142,7 +102,7 @@ namespace AddSharedParameters
             return groupString;
         }
 
-        private Dictionary<string, BuiltInParameterGroup> ParameterGroupUnderList(Document doc)
+        private Dictionary<string, BuiltInParameterGroup> ParameterGroupUnderDict(Document doc)
         {
             Dictionary<string, BuiltInParameterGroup> validGroups = new Dictionary<string, BuiltInParameterGroup>();
             validGroups.Add(FirstCharToUpper(BuiltInParameterGroup.PG_ANALYSIS_RESULTS.ToString()), BuiltInParameterGroup.PG_ANALYSIS_RESULTS);
@@ -200,8 +160,63 @@ namespace AddSharedParameters
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                //Categories category = ParameterCategoryList(doc).Values;
+                CategorySet categoryset = app.Create.NewCategorySet();
 
+                foreach (string catString in CategoryCheckList.Items)
+                //foreach (Category cat in ParameterCategoryList(doc).Values)
+                {
+                    foreach (KeyValuePair<string, Category> k in ParameterCategoryList(doc))
+                    {
+                        if(k.Key == catString)
+                        {
+                            categoryset.Insert(k.Value);
+                        }
+                    }
+                }
+
+                BuiltInParameterGroup parameterGroupUnder = new BuiltInParameterGroup();
+                string selectedGroup = GroupParameterUnderComboBox.SelectedItem.ToString();
+
+                foreach (KeyValuePair<string, BuiltInParameterGroup> k in ParameterGroupUnderDict(doc))
+                {
+                    if (k.Key == selectedGroup)
+                    {
+                        parameterGroupUnder = k.Value;
+                    }
+                }
+
+                foreach (string selectedParameter in ParameterList.Items)
+                {
+                    foreach (var dictPair in GetSharedParamDict())
+                    {
+                        foreach (var innerPair in dictPair.Value)
+                        {
+                            if (innerPair.Key.Contains(selectedParameter))
+                            {
+                                using (Transaction tx = new Transaction(doc))
+                                {
+                                    tx.Start("Add Selected Shared Parameters");
+                                    //parameter binding
+                                    InstanceBinding newIB = app.Create.NewInstanceBinding(categoryset);
+
+                                    //parameter group to text
+                                    doc.ParameterBindings.Insert(dictPair.Key, newIB, parameterGroupUnder);
+
+                                    tx.Commit();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Autodesk.Revit.Exceptions.ApplicationException)
+            {
+
+            }
+            
         }
         
         private void GroupSelectComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -211,18 +226,14 @@ namespace AddSharedParameters
             string selGroup = SelectedGroup.ToString();
 
             foreach (var dictPair in GetSharedParamDict())
-            //foreach (KeyValuePair<string, string> v in GetSharedParamDict())
             {
                 foreach (var innerPair in dictPair.Value)
                 {
                     if (innerPair.Value == selGroup)
-                    //if (v.Value == selGroup)
                     {
                         ParameterList.Items.Add(innerPair.Key);
-
                     }
                 }
-
             }
         }
         
