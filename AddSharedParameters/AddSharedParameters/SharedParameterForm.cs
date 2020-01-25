@@ -158,65 +158,142 @@ namespace AddSharedParameters
 
         }
 
-        private void AddButton_Click(object sender, EventArgs e)
+        public void AddParameter(Document doc, Autodesk.Revit.ApplicationServices.Application app)
         {
+            
+            Category category = doc.Settings.Categories.get_Item(BuiltInCategory.OST_Walls);
+
+            CategorySet categorySet = app.Create.NewCategorySet();
+            categorySet.Insert(category);
             try
             {
-                //Categories category = ParameterCategoryList(doc).Values;
-                CategorySet categoryset = app.Create.NewCategorySet();
+                TaskDialog.Show("Test", "After try");
+                DefinitionFile sharedParameterFile = app.OpenSharedParameterFile();
 
-                foreach (string catString in CategoryCheckList.Items)
-                //foreach (Category cat in ParameterCategoryList(doc).Values)
+                foreach (DefinitionGroup dg in sharedParameterFile.Groups)
                 {
-                    foreach (KeyValuePair<string, Category> k in ParameterCategoryList(doc))
+                    if (dg.Name == "Windows and doors")
                     {
-                        if(k.Key == catString)
+                        ExternalDefinition exDefinition = dg.Definitions.get_Item("Sound Rating") as ExternalDefinition;
+                        using (Transaction t = new Transaction(doc))
                         {
-                            categoryset.Insert(k.Value);
+                            TaskDialog.Show("Test", "Before transaction");
+                            t.Start("Add Shared Parameters");
+                            TaskDialog.Show("Test", "After transaction");
+                            InstanceBinding newIB = app.Create.NewInstanceBinding(categorySet);
+                            doc.ParameterBindings.Insert(exDefinition, newIB, BuiltInParameterGroup.PG_TEXT);
+                            TaskDialog.Show("Test", "Before commit");
+                            t.Commit();
+                            TaskDialog.Show("Test", "After commit");
                         }
                     }
                 }
 
-                BuiltInParameterGroup parameterGroupUnder = new BuiltInParameterGroup();
-                string selectedGroup = GroupParameterUnderComboBox.SelectedItem.ToString();
-
-                foreach (KeyValuePair<string, BuiltInParameterGroup> k in ParameterGroupUnderDict(doc))
-                {
-                    if (k.Key == selectedGroup)
-                    {
-                        parameterGroupUnder = k.Value;
-                    }
-                }
-
-                foreach (string selectedParameter in ParameterList.Items)
-                {
-                    foreach (var dictPair in GetSharedParamDict())
-                    {
-                        foreach (var innerPair in dictPair.Value)
-                        {
-                            if (innerPair.Key.Contains(selectedParameter))
-                            {
-                                using (Transaction tx = new Transaction(doc))
-                                {
-                                    tx.Start("Add Selected Shared Parameters");
-                                    //parameter binding
-                                    InstanceBinding newIB = app.Create.NewInstanceBinding(categoryset);
-
-                                    //parameter group to text
-                                    doc.ParameterBindings.Insert(dictPair.Key, newIB, parameterGroupUnder);
-
-                                    tx.Commit();
-                                }
-                            }
-                        }
-                    }
-                }
             }
             catch (Autodesk.Revit.Exceptions.ApplicationException)
             {
 
             }
             
+
+        }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            TaskDialog.Show("Test", "First");
+            AddParameter(doc, app);
+            TaskDialog.Show("Test", "Last");
+
+
+            Close();
+            /*
+            Category category = doc.Settings.Categories.get_Item(BuiltInCategory.OST_Walls);
+
+            CategorySet categorySet = app.Create.NewCategorySet();
+            categorySet.Insert(category);
+
+            try
+            {
+
+                DefinitionFile sharedParameterFile = app.OpenSharedParameterFile();
+
+                foreach(DefinitionGroup dg in sharedParameterFile.Groups)
+                {
+                    if(dg.Name == "Windows and doors")
+                    {
+                        ExternalDefinition exDefinition = dg.Definitions.get_Item("Sound Rating") as ExternalDefinition;
+                        using (Transaction t = new Transaction(doc))
+                        {
+                            t.Start("Add Shared Parameters");
+                            InstanceBinding newIB = app.Create.NewInstanceBinding(categorySet);
+                            doc.ParameterBindings.Insert(exDefinition, newIB, BuiltInParameterGroup.PG_TEXT);
+                            t.Commit();
+                        }
+                    }
+                }
+                */
+
+
+
+
+            /*
+            //Categories category = ParameterCategoryList(doc).Values;
+            CategorySet categoryset = app.Create.NewCategorySet();
+
+            foreach (string catString in CategoryCheckList.Items)
+            //foreach (Category cat in ParameterCategoryList(doc).Values)
+            {
+                foreach (KeyValuePair<string, Category> k in ParameterCategoryList(doc))
+                {
+                    if(k.Key == catString)
+                    {
+                        categoryset.Insert(k.Value);
+                    }
+                }
+            }
+
+            BuiltInParameterGroup parameterGroupUnder = new BuiltInParameterGroup();
+            string selectedGroup = GroupParameterUnderComboBox.SelectedItem.ToString();
+
+            foreach (KeyValuePair<string, BuiltInParameterGroup> k in ParameterGroupUnderDict(doc))
+            {
+                if (k.Key == selectedGroup)
+                {
+                    parameterGroupUnder = k.Value;
+                }
+            }
+
+            foreach (string selectedParameter in ParameterList.Items)
+            {
+                //foreach (var dictPair in GetSharedParamDict())
+                foreach (var dictPair in GetSharedParamDict())
+                {
+                    foreach (var innerPair in dictPair.Value)
+                    {
+                        if (innerPair.Key.Contains(selectedParameter))
+                        {
+                            using (Transaction tx = new Transaction(doc))
+                            {
+                                tx.Start("Add Selected Shared Parameters");
+                                //parameter binding
+                                InstanceBinding newIB = app.Create.NewInstanceBinding(categoryset);
+
+                                //parameter group to text
+                                doc.ParameterBindings.Insert(dictPair.Key, newIB, parameterGroupUnder);
+
+                                tx.Commit();
+                            }
+                        }
+                    }
+                }
+            }
+
+            }
+            catch (Autodesk.Revit.Exceptions.ApplicationException);
+            {
+
+            }
+        */
         }
         
         private void GroupSelectComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -239,7 +316,7 @@ namespace AddSharedParameters
         
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }
