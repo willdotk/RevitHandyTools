@@ -59,6 +59,7 @@
             this.ParameterList.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ParameterList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.ParameterList.Size = new System.Drawing.Size(280, 364);
+            this.ParameterList.Sorted = true;
             this.ParameterList.TabIndex = 2;
             this.ParameterList.SelectedIndexChanged += new System.EventHandler(this.ParameterList_SelectedIndexChanged);
             // 
@@ -97,7 +98,7 @@
             this.CategoryCheckList.FormattingEnabled = true;
             this.CategoryCheckList.HorizontalScrollbar = true;
             this.CategoryCheckList.Location = new System.Drawing.Point(20, 32);
-            this.CategoryCheckList.Margin = new System.Windows.Forms.Padding(5);
+            this.CategoryCheckList.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);
             this.CategoryCheckList.Name = "CategoryCheckList";
             this.CategoryCheckList.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.CategoryCheckList.Size = new System.Drawing.Size(272, 361);
@@ -185,7 +186,6 @@
             this.AcceptButton = this.AddButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.CancelButton;
             this.ClientSize = new System.Drawing.Size(659, 581);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.GroupParameterUnder);

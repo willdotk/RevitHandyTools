@@ -32,7 +32,7 @@ namespace AddSharedParameters
 
                 if(addingForm.DialogResult == System.Windows.Forms.DialogResult.OK)
                 {
-                    addingForm.AddParameter(doc, app);
+                    addingForm.AddParametersToProject(doc, app);
                 }
 
                 return Result.Succeeded;

@@ -158,22 +158,10 @@ namespace AddSharedParameters
 
         }
 
-        public void AddParameter(Document doc, Autodesk.Revit.ApplicationServices.Application app)
+        public void AddParametersToProject(Document doc, Autodesk.Revit.ApplicationServices.Application app)
         {
-            //Categories category = ParameterCategoryList(doc).Values;
-            CategorySet categoryset = app.Create.NewCategorySet();
 
-            foreach (string catString in CategoryCheckList.Items)
-            //foreach (Category cat in ParameterCategoryList(doc).Values)
-            {
-                foreach (KeyValuePair<string, Category> k in ParameterCategoryList(doc))
-                {
-                    if (k.Key == catString)
-                    {
-                        categoryset.Insert(k.Value);
-                    }
-                }
-            }
+            CategorySet categoryset = app.Create.NewCategorySet();
 
             BuiltInParameterGroup parameterGroupUnder = new BuiltInParameterGroup();
             string selectedGroup = GroupParameterUnderComboBox.SelectedItem.ToString();
@@ -186,7 +174,6 @@ namespace AddSharedParameters
                 }
             }
 
-
             foreach (string selectedParameter in ParameterList.SelectedItems)
             {
                 foreach (var dictPair in GetSharedParamDict())
@@ -195,16 +182,30 @@ namespace AddSharedParameters
                     {
                         if (innerPair.Key.Contains(selectedParameter))
                         {
-                            using (Transaction tx = new Transaction(doc))
+                            foreach (KeyValuePair<string, Category> k in ParameterCategoryList(doc))
                             {
-                                tx.Start("Add Selected Shared Parameters");
-                                //parameter binding
-                                InstanceBinding newIB = app.Create.NewInstanceBinding(categoryset);
 
-                                //parameter group to text
-                                doc.ParameterBindings.Insert(dictPair.Key, newIB, parameterGroupUnder);
+                                foreach (string catString in CategoryCheckList.CheckedItems)
+                                {
+                                    if (catString == k.Key)
+                                    {
+                                        categoryset.Insert(k.Value);
+                                        
+                                        //parameter binding
+                                        InstanceBinding newIB = app.Create.NewInstanceBinding(categoryset);
+                                        
+                                        using (Transaction tx = new Transaction(doc))
+                                        {
+                                            tx.Start("Add Selected Shared Parameters");
 
-                                tx.Commit();
+                                            //parameter group to text
+                                            doc.ParameterBindings.Insert(dictPair.Key, newIB, parameterGroupUnder);
+
+                                            tx.Commit();
+                                        }
+                                    }
+                                }
+
                             }
                         }
                     }
