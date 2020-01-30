@@ -176,33 +176,33 @@ namespace AddSharedParameters
             }
 
             List<string> lst = new List<string>() { "Existing shared parameters cannot be added - " };
-
-            foreach (string selectedParameter in ParameterList.SelectedItems)
+            using (Transaction tx = new Transaction(doc))
             {
-                foreach (var dictPair in GetSharedParamDict())
-                {
-                    foreach (var innerPair in dictPair.Value)
-                    {
-                        if (innerPair.Key.Contains(selectedParameter))
-                        {
-                            foreach (KeyValuePair<string, Category> k in ParameterCategoryList(doc))
-                            {
+                tx.Start("Add Selected Shared Parameters");
 
-                                foreach (string catString in CategoryCheckList.CheckedItems)
+                foreach (string selectedParameter in ParameterList.SelectedItems)
+                {
+                    foreach (var dictPair in GetSharedParamDict())
+                    {
+                        foreach (var innerPair in dictPair.Value)
+                        {
+                            if (innerPair.Key.Contains(selectedParameter))
+                            {
+                                foreach (KeyValuePair<string, Category> k in ParameterCategoryList(doc))
                                 {
-                                    if (catString == k.Key)
+
+                                    foreach (string catString in CategoryCheckList.CheckedItems)
                                     {
-                                        categoryset.Insert(k.Value);
-                                      
-                                        using (Transaction tx = new Transaction(doc))
+                                        if (catString == k.Key)
                                         {
+                                            categoryset.Insert(k.Value);
+
                                             if (doc.ParameterBindings.Contains(dictPair.Key))
                                             {
                                                 lst.Add(selectedParameter);
                                             }
                                             else
                                             {
-                                                tx.Start("Add Selected Shared Parameters");
                                                 if (TypeCheck.Checked)
                                                 {
                                                     TypeBinding newBinding = app.Create.NewTypeBinding(categoryset);
@@ -213,16 +213,17 @@ namespace AddSharedParameters
                                                     InstanceBinding newBinding = app.Create.NewInstanceBinding(categoryset);
                                                     doc.ParameterBindings.Insert(dictPair.Key, newBinding, parameterGroupUnder);
                                                 }
-                                                tx.Commit();
                                             }
+
                                         }
                                     }
-                                }
 
+                                }
                             }
                         }
                     }
                 }
+                tx.Commit();
             }
             TaskDialog.Show("T", String.Join(", ", lst.Distinct().ToArray()));
         }
