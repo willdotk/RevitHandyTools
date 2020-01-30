@@ -36,6 +36,7 @@ namespace AddSharedParameters
             ParameterList.Items.Add("Please select a group.");
             GroupParameterUnderComboBox.Items.AddRange(ParameterGroupUnderDict(doc).Keys.ToArray());
             CategoryCheckList.Items.AddRange(ParameterCategoryList(doc).Keys.ToList().ToArray());
+            InstanceCheck.Checked = true;
         }
 
         private Dictionary<ExternalDefinition, Dictionary<string, string>> GetSharedParamDict()
@@ -190,17 +191,20 @@ namespace AddSharedParameters
                                     if (catString == k.Key)
                                     {
                                         categoryset.Insert(k.Value);
-                                        
-                                        //parameter binding
-                                        InstanceBinding newIB = app.Create.NewInstanceBinding(categoryset);
-                                        
+                                      
                                         using (Transaction tx = new Transaction(doc))
                                         {
                                             tx.Start("Add Selected Shared Parameters");
-
-                                            //parameter group to text
-                                            doc.ParameterBindings.Insert(dictPair.Key, newIB, parameterGroupUnder);
-
+                                            if (TypeCheck.Checked)
+                                            {
+                                                TypeBinding newBinding = app.Create.NewTypeBinding(categoryset);
+                                                doc.ParameterBindings.Insert(dictPair.Key, newBinding, parameterGroupUnder);
+                                            }
+                                            else
+                                            {
+                                                InstanceBinding newBinding = app.Create.NewInstanceBinding(categoryset);
+                                                doc.ParameterBindings.Insert(dictPair.Key, newBinding, parameterGroupUnder);
+                                            }
                                             tx.Commit();
                                         }
                                     }
@@ -241,6 +245,16 @@ namespace AddSharedParameters
         private void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void TypeCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            InstanceCheck.Checked = !TypeCheck.Checked;
+        }
+
+        private void InstanceCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            TypeCheck.Checked = !InstanceCheck.Checked;
         }
     }
 }

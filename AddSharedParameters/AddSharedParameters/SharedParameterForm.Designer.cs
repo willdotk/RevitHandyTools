@@ -38,10 +38,14 @@
             this.GroupParameterUnder = new System.Windows.Forms.GroupBox();
             this.GroupParameterUnderComboBox = new System.Windows.Forms.ComboBox();
             this.CancelButton = new System.Windows.Forms.Button();
+            this.ParameterBinding = new System.Windows.Forms.GroupBox();
+            this.TypeCheck = new System.Windows.Forms.CheckBox();
+            this.InstanceCheck = new System.Windows.Forms.CheckBox();
             this.SharedParameterGroup.SuspendLayout();
             this.SharedParameterList.SuspendLayout();
             this.CategoryList.SuspendLayout();
             this.GroupParameterUnder.SuspendLayout();
+            this.ParameterBinding.SuspendLayout();
             this.SuspendLayout();
             // 
             // ParameterList
@@ -101,7 +105,7 @@
             this.CategoryCheckList.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);
             this.CategoryCheckList.Name = "CategoryCheckList";
             this.CategoryCheckList.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.CategoryCheckList.Size = new System.Drawing.Size(272, 361);
+            this.CategoryCheckList.Size = new System.Drawing.Size(272, 256);
             this.CategoryCheckList.TabIndex = 7;
             // 
             // SharedParameterGroup
@@ -137,9 +141,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CategoryList.Controls.Add(this.CategoryCheckList);
             this.CategoryList.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CategoryList.Location = new System.Drawing.Point(339, 106);
+            this.CategoryList.Location = new System.Drawing.Point(339, 210);
             this.CategoryList.Name = "CategoryList";
-            this.CategoryList.Size = new System.Drawing.Size(307, 417);
+            this.CategoryList.Size = new System.Drawing.Size(307, 313);
             this.CategoryList.TabIndex = 11;
             this.CategoryList.TabStop = false;
             this.CategoryList.Text = "Category List";
@@ -181,12 +185,47 @@
             this.CancelButton.UseVisualStyleBackColor = true;
             this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
+            // ParameterBinding
+            // 
+            this.ParameterBinding.Controls.Add(this.InstanceCheck);
+            this.ParameterBinding.Controls.Add(this.TypeCheck);
+            this.ParameterBinding.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParameterBinding.Location = new System.Drawing.Point(339, 106);
+            this.ParameterBinding.Name = "ParameterBinding";
+            this.ParameterBinding.Size = new System.Drawing.Size(307, 98);
+            this.ParameterBinding.TabIndex = 14;
+            this.ParameterBinding.TabStop = false;
+            this.ParameterBinding.Text = "Parameter Binding";
+            // 
+            // TypeCheck
+            // 
+            this.TypeCheck.AutoSize = true;
+            this.TypeCheck.Location = new System.Drawing.Point(20, 32);
+            this.TypeCheck.Name = "TypeCheck";
+            this.TypeCheck.Size = new System.Drawing.Size(60, 22);
+            this.TypeCheck.TabIndex = 0;
+            this.TypeCheck.Text = "Type";
+            this.TypeCheck.UseVisualStyleBackColor = true;
+            this.TypeCheck.CheckedChanged += new System.EventHandler(this.TypeCheck_CheckedChanged);
+            // 
+            // InstanceCheck
+            // 
+            this.InstanceCheck.AutoSize = true;
+            this.InstanceCheck.Location = new System.Drawing.Point(20, 61);
+            this.InstanceCheck.Name = "InstanceCheck";
+            this.InstanceCheck.Size = new System.Drawing.Size(84, 22);
+            this.InstanceCheck.TabIndex = 1;
+            this.InstanceCheck.Text = "Instance";
+            this.InstanceCheck.UseVisualStyleBackColor = true;
+            this.InstanceCheck.CheckedChanged += new System.EventHandler(this.InstanceCheck_CheckedChanged);
+            // 
             // SharedParameterForm
             // 
             this.AcceptButton = this.AddButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(659, 581);
+            this.Controls.Add(this.ParameterBinding);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.GroupParameterUnder);
             this.Controls.Add(this.CategoryList);
@@ -202,6 +241,8 @@
             this.SharedParameterList.ResumeLayout(false);
             this.CategoryList.ResumeLayout(false);
             this.GroupParameterUnder.ResumeLayout(false);
+            this.ParameterBinding.ResumeLayout(false);
+            this.ParameterBinding.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -217,5 +258,8 @@
         private System.Windows.Forms.GroupBox GroupParameterUnder;
         private System.Windows.Forms.ComboBox GroupParameterUnderComboBox;
         private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.GroupBox ParameterBinding;
+        private System.Windows.Forms.CheckBox InstanceCheck;
+        private System.Windows.Forms.CheckBox TypeCheck;
     }
 }
