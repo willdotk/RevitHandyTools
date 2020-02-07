@@ -5,7 +5,7 @@
     <Description>Some description for AddSharedParameters</Description>
     <Assembly>AddSharedParameters.dll</Assembly>
     <FullClassName>AddSharedParameters.Command</FullClassName>
-    <ClientId>675dea5b-3701-48ae-aa5f-c6fb64555d12</ClientId>
+    <ClientId>360ad5b1-af83-4def-93ba-8b7862004efe</ClientId>
     <VendorId>archipy</VendorId>
     <VendorDescription>archipy</VendorDescription>
   </AddIn>
@@ -13,7 +13,7 @@
     <Name>Application AddSharedParameters</Name>
     <Assembly>AddSharedParameters.dll</Assembly>
     <FullClassName>AddSharedParameters.App</FullClassName>
-    <ClientId>32009a2f-af2d-4ef3-8ee7-fd5d92513d54</ClientId>
+    <ClientId>dad1436c-9037-4ac7-a788-3b3a1e1a1cfd</ClientId>
     <VendorId>archipy</VendorId>
     <VendorDescription>archipy</VendorDescription>
   </AddIn>

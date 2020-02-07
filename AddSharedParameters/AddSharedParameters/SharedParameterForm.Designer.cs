@@ -39,8 +39,8 @@
             this.GroupParameterUnderComboBox = new System.Windows.Forms.ComboBox();
             this.CancelButton = new System.Windows.Forms.Button();
             this.ParameterBinding = new System.Windows.Forms.GroupBox();
-            this.TypeCheck = new System.Windows.Forms.CheckBox();
             this.InstanceCheck = new System.Windows.Forms.CheckBox();
+            this.TypeCheck = new System.Windows.Forms.CheckBox();
             this.SharedParameterGroup.SuspendLayout();
             this.SharedParameterList.SuspendLayout();
             this.CategoryList.SuspendLayout();
@@ -197,17 +197,6 @@
             this.ParameterBinding.TabStop = false;
             this.ParameterBinding.Text = "Parameter Binding";
             // 
-            // TypeCheck
-            // 
-            this.TypeCheck.AutoSize = true;
-            this.TypeCheck.Location = new System.Drawing.Point(20, 32);
-            this.TypeCheck.Name = "TypeCheck";
-            this.TypeCheck.Size = new System.Drawing.Size(60, 22);
-            this.TypeCheck.TabIndex = 0;
-            this.TypeCheck.Text = "Type";
-            this.TypeCheck.UseVisualStyleBackColor = true;
-            this.TypeCheck.CheckedChanged += new System.EventHandler(this.TypeCheck_CheckedChanged);
-            // 
             // InstanceCheck
             // 
             this.InstanceCheck.AutoSize = true;
@@ -219,11 +208,23 @@
             this.InstanceCheck.UseVisualStyleBackColor = true;
             this.InstanceCheck.CheckedChanged += new System.EventHandler(this.InstanceCheck_CheckedChanged);
             // 
+            // TypeCheck
+            // 
+            this.TypeCheck.AutoSize = true;
+            this.TypeCheck.Location = new System.Drawing.Point(20, 32);
+            this.TypeCheck.Name = "TypeCheck";
+            this.TypeCheck.Size = new System.Drawing.Size(60, 22);
+            this.TypeCheck.TabIndex = 0;
+            this.TypeCheck.Text = "Type";
+            this.TypeCheck.UseVisualStyleBackColor = true;
+            this.TypeCheck.CheckedChanged += new System.EventHandler(this.TypeCheck_CheckedChanged);
+            // 
             // SharedParameterForm
             // 
             this.AcceptButton = this.AddButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.CancelButton;
             this.ClientSize = new System.Drawing.Size(659, 581);
             this.Controls.Add(this.ParameterBinding);
             this.Controls.Add(this.CancelButton);
@@ -237,6 +238,7 @@
             this.Name = "SharedParameterForm";
             this.Text = "SharedParameterForm";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.SharedParameterForm_Load);
             this.SharedParameterGroup.ResumeLayout(false);
             this.SharedParameterList.ResumeLayout(false);
             this.CategoryList.ResumeLayout(false);

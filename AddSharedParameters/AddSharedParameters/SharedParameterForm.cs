@@ -261,5 +261,10 @@ namespace AddSharedParameters
         {
             TypeCheck.Checked = !InstanceCheck.Checked;
         }
+
+        private void SharedParameterForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
