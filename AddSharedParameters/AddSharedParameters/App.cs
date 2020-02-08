@@ -39,7 +39,7 @@ namespace AddSharedParameters
         {
             RibbonPanel ribbonPanel = null;
             string tapName = "Archipy";
-            string panelAnnotationName = "Shared Parameter";
+            string panelAnnotationName = "Shared Parameters";
             try
             {
                 a.CreateRibbonTab(tapName);
