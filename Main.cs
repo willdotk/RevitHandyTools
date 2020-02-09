@@ -15,33 +15,44 @@ namespace RevitHandyTools
     {
         public Result OnStartup(UIControlledApplication a)
         {
-            RibbonPanel panel = ribbonPanel(a);
+
+            string sharedParametersPanelName = "Shared Parameters";
+            string detailPanelName = "Detail";
+
+            RibbonPanel sharedParametersPanel = ribbonPanel(a, sharedParametersPanelName);
+            RibbonPanel detailPanel = ribbonPanel(a, detailPanelName);
 
             // System.Reflection.Assembly
             string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
 
             //SplitButtonData buttondata = new SplitButtonData("Shared Parameter", "Shared Parameter Test");
-            //SplitButton button = panel.AddItem(buttondata) as SplitButton;
+            //SplitButton button = sharedParametersPanel.AddItem(buttondata) as SplitButton;
 
-            PushButton pushbutton = panel.AddItem(new PushButtonData("AddSharedParameterBtnData", "Load to project", thisAssemblyPath, "RevitHandyTools.SharedParameters.LoadToProjectCommand")) as PushButton;
-
-            var tooltipimage = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "add_img_320x320.png");
-            var iconimage = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "add_img_32x32.png");
+            PushButton sharedParameterAddPushbutton = sharedParametersPanel.AddItem(new PushButtonData("LoadToProject", "Load to project", thisAssemblyPath, "RevitHandyTools.SharedParameters.LoadToProjectCommand")) as PushButton;
+            PushButton totalLineLengthPushbutton = detailPanel.AddItem(new PushButtonData("TotalLineLength", "Total Length", thisAssemblyPath, "RevitHandyTools.Detail.TotalLineLengthCommand")) as PushButton;
 
             // Reference PresentationCore for BitmapImage
-            pushbutton.ToolTip = "This adds multiple shared parameters to multiple categories within a project";
-            BitmapImage toolTipImage = new BitmapImage(new Uri(tooltipimage));
-            pushbutton.ToolTipImage = toolTipImage;
-            pushbutton.LargeImage = new BitmapImage(new Uri(tooltipimage));
+            sharedParameterAddPushbutton.ToolTip = "This adds multiple shared parameters to multiple categories within a project";
+            //BitmapImage toolTipImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "add_img_320x320.png")));
+            //sharedParameterAddPushbutton.ToolTipImage = toolTipImage;
+            BitmapImage SPA_toolTipLargeImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "add_img_32x32.png")));
+            sharedParameterAddPushbutton.LargeImage = SPA_toolTipLargeImage;
+
+            totalLineLengthPushbutton.ToolTip = "This adds up all the selected detail lines length.";
+            BitmapImage TLL_toolTipImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "measurement_img_320x320.png")));
+            totalLineLengthPushbutton.ToolTipImage = TLL_toolTipImage;
+            BitmapImage TLL_toolTipLargeImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "measurement_img_32x32.png")));
+            totalLineLengthPushbutton.LargeImage = TLL_toolTipLargeImage;
 
             return Result.Succeeded;
         }
 
-        public RibbonPanel ribbonPanel(UIControlledApplication a)
+        public RibbonPanel ribbonPanel(UIControlledApplication a, string panelName)
         {
             RibbonPanel ribbonPanel = null;
             string tapName = "Archipy";
-            string panelAnnotationName = "Shared Parameters";
+            List<string> panelList = new List<string>() { "Detail", "Shared Parameters" };
+            //string panelAnnotationName = "Shared Parameters";
             try
             {
                 a.CreateRibbonTab(tapName);
@@ -49,14 +60,18 @@ namespace RevitHandyTools
             catch { }
             try
             {
-                RibbonPanel panel = a.CreateRibbonPanel(tapName, panelAnnotationName);
+                foreach(string p_name in panelList)
+                {
+                    //RibbonPanel panel = a.CreateRibbonPanel(tapName, panelAnnotationName);
+                    RibbonPanel panel = a.CreateRibbonPanel(tapName, p_name);
+                }
             }
             catch { }
 
             List<RibbonPanel> panels = a.GetRibbonPanels(tapName);
             foreach (RibbonPanel p in panels)
             {
-                if (p.Name == panelAnnotationName)
+                if (p.Name == panelName)
                 {
                     ribbonPanel = p;
                 }
