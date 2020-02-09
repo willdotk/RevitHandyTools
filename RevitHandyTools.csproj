@@ -67,6 +67,7 @@
     <Compile Include="SharedParameters\LoadToProjectForm.Designer.cs">
       <DependentUpon>LoadToProjectForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SharedParameters\SharedParametersLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="RevitHandyTools.addin" />
