@@ -28,15 +28,18 @@ namespace RevitHandyTools
             //SplitButtonData buttondata = new SplitButtonData("Shared Parameter", "Shared Parameter Test");
             //SplitButton button = sharedParametersPanel.AddItem(buttondata) as SplitButton;
 
-            PushButton sharedParameterAddPushbutton = sharedParametersPanel.AddItem(new PushButtonData("LoadToProject", "Load to project", thisAssemblyPath, "RevitHandyTools.SharedParameters.LoadToProjectCommand")) as PushButton;
+            PushButton sharedParameterAddToProjectButton = sharedParametersPanel.AddItem(new PushButtonData("LoadToProject", "Load to project", thisAssemblyPath, "RevitHandyTools.SharedParameters.LoadToProjectCommand")) as PushButton;
+            PushButton sharedParameterAddToFamilyButton = sharedParametersPanel.AddItem(new PushButtonData("LoadToFamily", "Load to family", thisAssemblyPath, "RevitHandyTools.SharedParameters.LoadToFamilyCommand")) as PushButton;
             PushButton totalLineLengthPushbutton = detailPanel.AddItem(new PushButtonData("TotalLineLength", "Total Length", thisAssemblyPath, "RevitHandyTools.Detail.TotalLineLengthCommand")) as PushButton;
 
             // Reference PresentationCore for BitmapImage
-            sharedParameterAddPushbutton.ToolTip = "This adds multiple shared parameters to multiple categories within a project";
+            sharedParameterAddToProjectButton.ToolTip = "This adds multiple shared parameters to multiple categories within a project";
+            sharedParameterAddToFamilyButton.ToolTip = "This adds multiple shared parameters to a family";
             //BitmapImage toolTipImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "add_img_320x320.png")));
-            //sharedParameterAddPushbutton.ToolTipImage = toolTipImage;
+            //sharedParameterAddToProjectButton.ToolTipImage = toolTipImage;
             BitmapImage SPA_toolTipLargeImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "add_img_32x32.png")));
-            sharedParameterAddPushbutton.LargeImage = SPA_toolTipLargeImage;
+            sharedParameterAddToProjectButton.LargeImage = SPA_toolTipLargeImage;
+            sharedParameterAddToFamilyButton.LargeImage = SPA_toolTipLargeImage;
 
             totalLineLengthPushbutton.ToolTip = "This adds up all the selected detail lines length.";
             BitmapImage TLL_toolTipImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "measurement_img_320x320.png")));
