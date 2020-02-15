@@ -13,10 +13,10 @@ namespace RevitHandyTools.SharedParameters
         public Autodesk.Revit.ApplicationServices.Application app = null;
         public Document doc = null;
         
-        public SharedParametersLibrary(Document dOcument, Autodesk.Revit.ApplicationServices.Application aPplication)
+        public SharedParametersLibrary(Document document, Autodesk.Revit.ApplicationServices.Application application)
         {
-            app = aPplication;
-            doc = dOcument;
+            app = application;
+            doc = document;
             definitionfile = app.OpenSharedParameterFile();
         }
 

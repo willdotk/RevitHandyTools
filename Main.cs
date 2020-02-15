@@ -30,6 +30,7 @@ namespace RevitHandyTools
 
             PushButton sharedParameterAddToProjectButton = sharedParametersPanel.AddItem(new PushButtonData("LoadToProject", "Load to project", thisAssemblyPath, "RevitHandyTools.SharedParameters.LoadToProjectCommand")) as PushButton;
             PushButton sharedParameterAddToFamilyButton = sharedParametersPanel.AddItem(new PushButtonData("LoadToFamily", "Load to family", thisAssemblyPath, "RevitHandyTools.SharedParameters.LoadToFamilyCommand")) as PushButton;
+            
             PushButton totalLineLengthPushbutton = detailPanel.AddItem(new PushButtonData("TotalLineLength", "Total Length", thisAssemblyPath, "RevitHandyTools.Detail.TotalLineLengthCommand")) as PushButton;
 
             // Reference PresentationCore for BitmapImage

@@ -16,12 +16,12 @@ namespace RevitHandyTools.SharedParameters
         public Autodesk.Revit.ApplicationServices.Application app = null;
         public Document doc = null;
 
-        public LoadToProjectForm(Document dOcument, Autodesk.Revit.ApplicationServices.Application aPplication)
+        public LoadToProjectForm(Document document, Autodesk.Revit.ApplicationServices.Application application)
         {
             InitializeComponent();
 
-            app = aPplication;
-            doc = dOcument;
+            app = application;
+            doc = document;
 
             definitionfile = app.OpenSharedParameterFile();
 
