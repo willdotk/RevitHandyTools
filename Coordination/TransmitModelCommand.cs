@@ -1,5 +1,6 @@
 ﻿#region Namespaces
 using System;
+using System.Collections.Generic;
 using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
@@ -22,24 +23,35 @@ namespace RevitHandyTools.Coordination
             Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
+
             try
             {
 
-                View currentView = uidoc.ActiveView;
-
-                var viewtemplate = PostableCommand.ManageViewTemplates;
-                var viewTempId = currentView.ViewTemplateId;
+                ICollection<ElementId> idCollection = new List<ElementId>();
 
                 FilteredElementCollector viewTemplateCollector = new FilteredElementCollector(doc);
                 viewTemplateCollector.OfClass(typeof(View));
-                
-                foreach(View v in viewTemplateCollector)
+
+                foreach (View v in viewTemplateCollector)
                 {
                     if (v.IsTemplate)
                     {
-                        TaskDialog.Show("Test", v.Name);
+                        idCollection.Add(v.Id);
                     }
                 }
+
+                using (Transaction tx = new Transaction(doc))
+                {
+                    tx.Start("Cleaning up a project for transmit");
+                    doc.Delete(idCollection);
+                    tx.Commit();
+                }
+
+
+
+
+                TaskDialog.Show("Revit", "The current project is now ready for transmit");
+                
 
                 return Result.Succeeded;
             }
