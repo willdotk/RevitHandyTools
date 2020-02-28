@@ -26,7 +26,8 @@ namespace RevitHandyTools.Coordination
 
             try
             {
-
+                #region
+                // To delete all view templates
                 ICollection<ElementId> idCollection = new List<ElementId>();
 
                 FilteredElementCollector viewTemplateCollector = new FilteredElementCollector(doc);
@@ -39,16 +40,31 @@ namespace RevitHandyTools.Coordination
                         idCollection.Add(v.Id);
                     }
                 }
+                #endregion
 
+                #region
+                // To delete all project parameters
+                BindingMap bindingMap = doc.ParameterBindings;
+
+                FilteredElementCollector parameterElementCollector = new FilteredElementCollector(doc);
+                parameterElementCollector.OfClass(typeof(ParameterElement));
+
+                foreach (ParameterElement parameterElement in parameterElementCollector)
+                {
+                    if (bindingMap.Contains(parameterElement.GetDefinition()))
+                    {
+                        idCollection.Add(parameterElement.Id);
+                    }
+                }
+                #endregion
+
+                
                 using (Transaction tx = new Transaction(doc))
                 {
                     tx.Start("Cleaning up a project for transmit");
                     doc.Delete(idCollection);
                     tx.Commit();
                 }
-
-
-
 
                 TaskDialog.Show("Revit", "The current project is now ready for transmit");
                 
