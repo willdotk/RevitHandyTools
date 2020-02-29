@@ -58,7 +58,18 @@ namespace RevitHandyTools.Coordination
                 }
                 #endregion
 
-                
+                #region
+                // Go to 3D view and delete all views except 3D view
+
+                RevitCommandId commandId = RevitCommandId.LookupPostableCommandId(PostableCommand.Default3DView);
+
+                if (commandData.Application.CanPostCommand(commandId))
+                {
+                    commandData.Application.PostCommand(commandId);
+                }
+                #endregion
+
+                /*
                 using (Transaction tx = new Transaction(doc))
                 {
                     tx.Start("Cleaning up a project for transmit");
@@ -67,7 +78,7 @@ namespace RevitHandyTools.Coordination
                 }
 
                 TaskDialog.Show("Revit", "The current project is now ready for transmit");
-                
+                */
 
                 return Result.Succeeded;
             }
