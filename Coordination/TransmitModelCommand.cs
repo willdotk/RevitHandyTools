@@ -23,21 +23,32 @@ namespace RevitHandyTools.Coordination
             Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
-
             try
             {
+                ICollection<ElementId> viewTemplateIdCollection = new List<ElementId>();
+
+                #region
+                // Go to 3D view and delete all views except 3D view
+
+                RevitCommandId commandId = RevitCommandId.LookupPostableCommandId(PostableCommand.Default3DView);
+                
+                if (commandData.Application.CanPostCommand(commandId))
+                {
+                    commandData.Application.PostCommand(commandId);
+                }
+                #endregion
+
                 #region
                 // To delete all view templates
-                ICollection<ElementId> idCollection = new List<ElementId>();
 
-                FilteredElementCollector viewTemplateCollector = new FilteredElementCollector(doc);
-                viewTemplateCollector.OfClass(typeof(View));
+                FilteredElementCollector viewCollector = new FilteredElementCollector(doc);
+                viewCollector.OfClass(typeof(View));
 
-                foreach (View v in viewTemplateCollector)
+                foreach (View v in viewCollector)
                 {
-                    if (v.IsTemplate)
+                    if (v.ViewType.ToString() != "ProjectBrowser" && v.ViewType.ToString() != "SystemBrowser" && v.Name != "{3D}")
                     {
-                        idCollection.Add(v.Id);
+                        viewTemplateIdCollection.Add(v.Id);
                     }
                 }
                 #endregion
@@ -53,32 +64,20 @@ namespace RevitHandyTools.Coordination
                 {
                     if (bindingMap.Contains(parameterElement.GetDefinition()))
                     {
-                        idCollection.Add(parameterElement.Id);
+                        viewTemplateIdCollection.Add(parameterElement.Id);
                     }
                 }
                 #endregion
-
-                #region
-                // Go to 3D view and delete all views except 3D view
-
-                RevitCommandId commandId = RevitCommandId.LookupPostableCommandId(PostableCommand.Default3DView);
-
-                if (commandData.Application.CanPostCommand(commandId))
-                {
-                    commandData.Application.PostCommand(commandId);
-                }
-                #endregion
-
-                /*
+                
                 using (Transaction tx = new Transaction(doc))
                 {
                     tx.Start("Cleaning up a project for transmit");
-                    doc.Delete(idCollection);
+                    doc.Delete(viewTemplateIdCollection);
                     tx.Commit();
                 }
-
+                
                 TaskDialog.Show("Revit", "The current project is now ready for transmit");
-                */
+                
 
                 return Result.Succeeded;
             }
