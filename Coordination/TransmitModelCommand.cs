@@ -29,13 +29,14 @@ namespace RevitHandyTools.Coordination
 
                 #region
                 // Go to 3D view and delete all views except 3D view
-
-                RevitCommandId commandId = RevitCommandId.LookupPostableCommandId(PostableCommand.Default3DView);
+                /*
+                RevitCommandId threeDViewcommandId = RevitCommandId.LookupPostableCommandId(PostableCommand.Default3DView);
                 
-                if (commandData.Application.CanPostCommand(commandId))
+                if (commandData.Application.CanPostCommand(threeDViewcommandId))
                 {
-                    commandData.Application.PostCommand(commandId);
+                    commandData.Application.PostCommand(threeDViewcommandId);
                 }
+                */
                 #endregion
 
                 #region
@@ -68,6 +69,18 @@ namespace RevitHandyTools.Coordination
                     }
                 }
                 #endregion
+
+                #region
+                // To purge a project
+ 
+                string s_commandToDisable = "ID_PURGE_UNUSED";
+                RevitCommandId s_commandId = RevitCommandId.LookupCommandId(s_commandToDisable);
+
+
+                uiapp.PostCommand(s_commandId);
+
+                #endregion
+
                 
                 using (Transaction tx = new Transaction(doc))
                 {
@@ -78,7 +91,6 @@ namespace RevitHandyTools.Coordination
                 
                 TaskDialog.Show("Revit", "The current project is now ready for transmit");
                 
-
                 return Result.Succeeded;
             }
             catch (Exception e)

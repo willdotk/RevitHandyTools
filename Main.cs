@@ -43,8 +43,8 @@ namespace RevitHandyTools
             sharedParameterAddToFamilyButton.LargeImage = SPA_toolTipLargeImage;
 
             totalLineLengthPushbutton.ToolTip = "This adds up all the selected detail lines length.";
-            BitmapImage TLL_toolTipImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "measurement_img_320x320.png")));
-            totalLineLengthPushbutton.ToolTipImage = TLL_toolTipImage;
+            //BitmapImage TLL_toolTipImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "measurement_img_320x320.png")));
+            //totalLineLengthPushbutton.ToolTipImage = TLL_toolTipImage;
             BitmapImage TLL_toolTipLargeImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "measurement_img_32x32.png")));
             totalLineLengthPushbutton.LargeImage = TLL_toolTipLargeImage;
 
@@ -54,7 +54,7 @@ namespace RevitHandyTools
         public RibbonPanel ribbonPanel(UIControlledApplication a, string panelName)
         {
             RibbonPanel ribbonPanel = null;
-            string tapName = "Archipy";
+            string tapName = "RHT";
             List<string> panelList = new List<string>() { "Detail", "Shared Parameters" };
             //string panelAnnotationName = "Shared Parameters";
             try
