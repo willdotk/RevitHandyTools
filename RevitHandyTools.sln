@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevitHandyTools", "RevitHandyTools.csproj", "{4D027FE3-CAF6-4382-9EFA-1F4BBF2144CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4D027FE3-CAF6-4382-9EFA-1F4BBF2144CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D027FE3-CAF6-4382-9EFA-1F4BBF2144CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D027FE3-CAF6-4382-9EFA-1F4BBF2144CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D027FE3-CAF6-4382-9EFA-1F4BBF2144CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB7A1F2B-B491-421F-8432-FC6BF0C356E5}
+	EndGlobalSection
+EndGlobal
