@@ -24,16 +24,13 @@ namespace RevitHandyTools.Coordination
             Autodesk.Revit.ApplicationServices.Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
-            DialogResult dialogresult = MessageBox.Show("This will remove critical settings of the project." +
-                " Please make sure you run this extension in a coordiantion model." + " Do you want to preceed?",
-                "Cleaning Project for Model Transmit" , MessageBoxButtons.YesNo);
+            ICollection<ElementId> viewTemplateIdCollection = new List<ElementId>();
 
-            if (dialogresult == DialogResult.Yes && uidoc.ActiveView.Name.StartsWith("{3D"))
+            #region
+            void ClaningProject()
             {
                 try
                 {
-                    ICollection<ElementId> viewTemplateIdCollection = new List<ElementId>();
-
                     #region
                     // To delete all view templates
 
@@ -75,24 +72,25 @@ namespace RevitHandyTools.Coordination
                     uiapp.PostCommand(s_commandId);
 
                     #endregion
-
-                    /*
-                    using (Transaction tx = new Transaction(doc))
-                    {
-                        tx.Start("Cleaning up a project for transmit");
-                        doc.Delete(viewTemplateIdCollection);
-                        tx.Commit();
-                    }
                 
                     TaskDialog.Show("Revit", "The current project is now ready for transmit");
-                    */
-                    return Result.Succeeded;
                 }
                 catch (Exception e)
                 {
                     TaskDialog.Show("Error", e.ToString());
-                    return Result.Failed;
+
                 }
+            }
+            #endregion
+
+            DialogResult dialogresult = MessageBox.Show("This will remove critical settings of the project." +
+                " Please make sure you run this extension in a coordiantion model." + " Do you want to preceed?",
+                "Cleaning Project for Model Transmit" , MessageBoxButtons.YesNo);
+
+            if (dialogresult == DialogResult.Yes && uidoc.ActiveView.Name.StartsWith("{3D"))
+            {
+                ClaningProject();
+
             }
             else if(dialogresult == DialogResult.Yes && !uidoc.ActiveView.Name.StartsWith("{3D"))
             {
@@ -105,13 +103,21 @@ namespace RevitHandyTools.Coordination
                     commandData.Application.PostCommand(threeDViewcommandId);
                 }
                 #endregion
-                return Result.Succeeded;
+                //ClaningProject();
             }
             else
             {
-                
-                return Result.Succeeded;
+
             }
+
+            using (Transaction tx = new Transaction(doc))
+            {
+                tx.Start("Cleaning up a project for transmit");
+                doc.Delete(viewTemplateIdCollection);
+                tx.Commit();
+            }
+
+            return Result.Succeeded;
         }
     }
 }

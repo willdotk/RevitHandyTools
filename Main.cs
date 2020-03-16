@@ -18,9 +18,11 @@ namespace RevitHandyTools
 
             string sharedParametersPanelName = "Shared Parameters";
             string detailPanelName = "Detail";
+            string coordinationPanelName = "Coordination";
 
             RibbonPanel sharedParametersPanel = ribbonPanel(a, sharedParametersPanelName);
             RibbonPanel detailPanel = ribbonPanel(a, detailPanelName);
+            RibbonPanel coordinationPanel = ribbonPanel(a, coordinationPanelName);
 
             // System.Reflection.Assembly
             string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
@@ -33,6 +35,8 @@ namespace RevitHandyTools
             
             PushButton totalLineLengthPushbutton = detailPanel.AddItem(new PushButtonData("TotalLineLength", "Total Length", thisAssemblyPath, "RevitHandyTools.Detail.TotalLineLengthCommand")) as PushButton;
 
+            PushButton transmitModelPushbutton = coordinationPanel.AddItem(new PushButtonData("TransmitModel", "Model Transmit", thisAssemblyPath, "RevitHandyTools.Coordination.TransmitModelCommand")) as PushButton;
+
             // Reference PresentationCore for BitmapImage
             sharedParameterAddToProjectButton.ToolTip = "This adds multiple shared parameters to multiple categories within a project";
             sharedParameterAddToFamilyButton.ToolTip = "This adds multiple shared parameters to a family";
@@ -43,10 +47,12 @@ namespace RevitHandyTools
             sharedParameterAddToFamilyButton.LargeImage = SPA_toolTipLargeImage;
 
             totalLineLengthPushbutton.ToolTip = "This adds up all the selected detail lines length.";
-            //BitmapImage TLL_toolTipImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "measurement_img_320x320.png")));
-            //totalLineLengthPushbutton.ToolTipImage = TLL_toolTipImage;
             BitmapImage TLL_toolTipLargeImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "measurement_img_32x32.png")));
             totalLineLengthPushbutton.LargeImage = TLL_toolTipLargeImage;
+
+            transmitModelPushbutton.ToolTip = "This clean up the current project for transmit.";
+            BitmapImage TRM_toolTipLargeImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "packing_img_32x32.png")));
+            transmitModelPushbutton.LargeImage = TRM_toolTipLargeImage;
 
             return Result.Succeeded;
         }
@@ -55,7 +61,7 @@ namespace RevitHandyTools
         {
             RibbonPanel ribbonPanel = null;
             string tapName = "RHT";
-            List<string> panelList = new List<string>() { "Detail", "Shared Parameters" };
+            List<string> panelList = new List<string>() { "Coordination", "Detail", "Shared Parameters" };
             //string panelAnnotationName = "Shared Parameters";
             try
             {
