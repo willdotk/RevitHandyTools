@@ -1,5 +1,6 @@
 #region Namespaces
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Media.Imaging;
@@ -27,32 +28,22 @@ namespace RevitHandyTools
             // System.Reflection.Assembly
             string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
 
-            //SplitButtonData buttondata = new SplitButtonData("Shared Parameter", "Shared Parameter Test");
-            //SplitButton button = sharedParametersPanel.AddItem(buttondata) as SplitButton;
-
-            PushButton sharedParameterAddToProjectButton = sharedParametersPanel.AddItem(new PushButtonData("LoadToProject", "Load to project", thisAssemblyPath, "RevitHandyTools.SharedParameters.LoadToProjectCommand")) as PushButton;
-            PushButton sharedParameterAddToFamilyButton = sharedParametersPanel.AddItem(new PushButtonData("LoadToFamily", "Load to family", thisAssemblyPath, "RevitHandyTools.SharedParameters.LoadToFamilyCommand")) as PushButton;
+            PulldownButtonData loadParameterData = new PulldownButtonData("LoadParameters", "Load Parameters");
+            RibbonItem loadParameterItem = sharedParametersPanel.AddItem(loadParameterData);
+            PulldownButton loadOptionButton = loadParameterItem as PulldownButton;
             
+            loadOptionButton.ToolTip = "To add multiple shared parameters to multiple categories within a project or family. Icon made by Smartline from www.flaticon.com";
+            loadOptionButton.LargeImage = GetEmbeddedImage("RevitHandyTools.Resources.add_img_32x32.png");
+            loadOptionButton.AddPushButton(new PushButtonData("LoadToProject", "Load to project", thisAssemblyPath, "RevitHandyTools.SharedParameters.LoadToProjectCommand"));
+            loadOptionButton.AddPushButton(new PushButtonData("LoadToFamily", "Load to family", thisAssemblyPath, "RevitHandyTools.SharedParameters.LoadToFamilyCommand"));
+
             PushButton totalLineLengthPushbutton = detailPanel.AddItem(new PushButtonData("TotalLineLength", "Total Length", thisAssemblyPath, "RevitHandyTools.Detail.TotalLineLengthCommand")) as PushButton;
-
+            totalLineLengthPushbutton.ToolTip = "To add up total length of selected detail lines. Icon made by Good Ware from www.flaticon.com";
+            totalLineLengthPushbutton.LargeImage = GetEmbeddedImage("RevitHandyTools.Resources.measurement_img_32x32.png");
+            
             PushButton transmitModelPushbutton = coordinationPanel.AddItem(new PushButtonData("TransmitModel", "Model Transmit", thisAssemblyPath, "RevitHandyTools.Coordination.TransmitModelCommand")) as PushButton;
-
-            // Reference PresentationCore for BitmapImage
-            sharedParameterAddToProjectButton.ToolTip = "This adds multiple shared parameters to multiple categories within a project";
-            sharedParameterAddToFamilyButton.ToolTip = "This adds multiple shared parameters to a family";
-            //BitmapImage toolTipImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "add_img_320x320.png")));
-            //sharedParameterAddToProjectButton.ToolTipImage = toolTipImage;
-            BitmapImage SPA_toolTipLargeImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "add_img_32x32.png")));
-            sharedParameterAddToProjectButton.LargeImage = SPA_toolTipLargeImage;
-            sharedParameterAddToFamilyButton.LargeImage = SPA_toolTipLargeImage;
-
-            totalLineLengthPushbutton.ToolTip = "This adds up all the selected detail lines length.";
-            BitmapImage TLL_toolTipLargeImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "measurement_img_32x32.png")));
-            totalLineLengthPushbutton.LargeImage = TLL_toolTipLargeImage;
-
-            transmitModelPushbutton.ToolTip = "This clean up the current project for transmit.";
-            BitmapImage TRM_toolTipLargeImage = new BitmapImage(new Uri(System.IO.Path.Combine(System.IO.Path.GetDirectoryName(thisAssemblyPath), "packing_img_32x32.png")));
-            transmitModelPushbutton.LargeImage = TRM_toolTipLargeImage;
+            transmitModelPushbutton.ToolTip = "To clean up the current project for model transmit. Icon made by Freepik from www.flaticon.com";
+            transmitModelPushbutton.LargeImage = GetEmbeddedImage("RevitHandyTools.Resources.packing_img_32x32.png");
 
             return Result.Succeeded;
         }
@@ -87,6 +78,20 @@ namespace RevitHandyTools
                 }
             }
             return ribbonPanel;
+        }
+ 
+        static BitmapSource GetEmbeddedImage(string name)
+        {
+            try
+            {
+                Assembly a = Assembly.GetExecutingAssembly();
+                Stream s = a.GetManifestResourceStream(name);
+                return BitmapFrame.Create(s);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public Result OnShutdown(UIControlledApplication a)

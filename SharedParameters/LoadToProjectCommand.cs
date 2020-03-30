@@ -4,6 +4,7 @@ using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using System.Windows.Forms;
 #endregion
 
 namespace RevitHandyTools.SharedParameters
@@ -18,26 +19,40 @@ namespace RevitHandyTools.SharedParameters
         {
             UIApplication uiapp = commandData.Application;
             UIDocument uidoc = uiapp.ActiveUIDocument;
-            Application app = uiapp.Application;
+            Autodesk.Revit.ApplicationServices.Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
-            try
-            {
-                LoadToProjectForm addingForm = new LoadToProjectForm(doc, app);
-                addingForm.ShowDialog();
+            DialogResult dialogresult = MessageBox.Show("This will overwrite parameters that have the same name. " +
+            " Would you like to to preceed?", "Add shared parameters to project", MessageBoxButtons.YesNo);
 
-                if (addingForm.DialogResult == System.Windows.Forms.DialogResult.OK)
+            if (dialogresult == DialogResult.Yes)
+            {
+                try
                 {
-                    addingForm.AddParametersToProject(doc, app);
+                    LoadToProjectForm addingForm = new LoadToProjectForm(doc, app);
+                    addingForm.ShowDialog();
+
+                    if (addingForm.DialogResult == System.Windows.Forms.DialogResult.OK)
+                    {
+                        addingForm.AddParametersToProject(doc, app);
+                    }
+
+                    return Result.Succeeded;
+                }
+                catch (Exception e)
+                {
+                    TaskDialog.Show("Error", e.ToString());
+                    return Result.Failed;
                 }
 
+            }
+
+            else
+            {
                 return Result.Succeeded;
             }
-            catch (Exception e)
-            {
-                TaskDialog.Show("Error", e.ToString());
-                return Result.Failed;
-            }
+
+
         }
     }
 }

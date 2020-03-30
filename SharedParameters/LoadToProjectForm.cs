@@ -82,12 +82,13 @@ namespace RevitHandyTools.SharedParameters
                                 if (TypeCheck.Checked)
                                 {
                                     TypeBinding newBinding = app.Create.NewTypeBinding(categoryset);
-                                    doc.ParameterBindings.Insert(dictPair.Key, newBinding, parameterGroupUnder);
+                                    doc.ParameterBindings.ReInsert(dictPair.Key, newBinding, parameterGroupUnder);
                                 }
                                 else
                                 {
                                     InstanceBinding newBinding = app.Create.NewInstanceBinding(categoryset);
-                                    doc.ParameterBindings.Insert(dictPair.Key, newBinding, parameterGroupUnder);
+                                    doc.ParameterBindings.ReInsert(dictPair.Key, newBinding, parameterGroupUnder);
+
                                 }
                             }
                         }
@@ -122,12 +123,12 @@ namespace RevitHandyTools.SharedParameters
         {
             // This solves issue that transaction does not start through button click event
             DialogResult = DialogResult.OK;
-            Close();
+            this.Close();
         }
 
         private void CancelButton_Click(object sender, EventArgs e)
         {
-            Close();
+            this.Close();
         }
 
         private void TypeCheck_CheckedChanged(object sender, EventArgs e)
@@ -138,6 +139,15 @@ namespace RevitHandyTools.SharedParameters
         private void InstanceCheck_CheckedChanged(object sender, EventArgs e)
         {
             TypeCheck.Checked = !InstanceCheck.Checked;
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape)
+            {
+                this.Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }
