@@ -31,18 +31,21 @@ namespace RevitHandyTools
             PulldownButtonData loadParameterData = new PulldownButtonData("LoadParameters", "Load Parameters");
             RibbonItem loadParameterItem = sharedParametersPanel.AddItem(loadParameterData);
             PulldownButton loadOptionButton = loadParameterItem as PulldownButton;
-            
-            loadOptionButton.ToolTip = "To add multiple shared parameters to multiple categories within a project or family. Icon made by Smartline from www.flaticon.com";
+
+            // Icon made by Smartline from www.flaticon.com
+            loadOptionButton.ToolTip = "To add multiple shared parameters to multiple categories within a project or family.";
             loadOptionButton.LargeImage = GetEmbeddedImage("RevitHandyTools.Resources.add_img_32x32.png");
             loadOptionButton.AddPushButton(new PushButtonData("LoadToProject", "Load to project", thisAssemblyPath, "RevitHandyTools.SharedParameters.LoadToProjectCommand"));
             loadOptionButton.AddPushButton(new PushButtonData("LoadToFamily", "Load to family", thisAssemblyPath, "RevitHandyTools.SharedParameters.LoadToFamilyCommand"));
 
+            // Icon made by Good Ware from www.flaticon.com
             PushButton totalLineLengthPushbutton = detailPanel.AddItem(new PushButtonData("TotalLineLength", "Total Length", thisAssemblyPath, "RevitHandyTools.Detail.TotalLineLengthCommand")) as PushButton;
-            totalLineLengthPushbutton.ToolTip = "To add up total length of selected detail lines. Icon made by Good Ware from www.flaticon.com";
+            totalLineLengthPushbutton.ToolTip = "To add up total length of selected detail lines.";
             totalLineLengthPushbutton.LargeImage = GetEmbeddedImage("RevitHandyTools.Resources.measurement_img_32x32.png");
-            
+
+            // Icon made by Freepik from www.flaticon.com
             PushButton transmitModelPushbutton = coordinationPanel.AddItem(new PushButtonData("TransmitModel", "Model Transmit", thisAssemblyPath, "RevitHandyTools.Coordination.TransmitModelCommand")) as PushButton;
-            transmitModelPushbutton.ToolTip = "To clean up the current project for model transmit. Icon made by Freepik from www.flaticon.com";
+            transmitModelPushbutton.ToolTip = "To clean up the current project for model transmit.";
             transmitModelPushbutton.LargeImage = GetEmbeddedImage("RevitHandyTools.Resources.packing_img_32x32.png");
 
             return Result.Succeeded;
