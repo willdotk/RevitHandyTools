@@ -54,7 +54,7 @@ namespace RevitHandyTools
         public RibbonPanel ribbonPanel(UIControlledApplication a, string panelName)
         {
             RibbonPanel ribbonPanel = null;
-            string tapName = "RHT";
+            string tapName = "RevitHandyTools";
             List<string> panelList = new List<string>() { "Coordination", "Detail", "Shared Parameters" };
             //string panelAnnotationName = "Shared Parameters";
             try
