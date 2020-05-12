@@ -60,8 +60,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Coordination\CoordinationMain.cs" />
+    <Compile Include="Coordination\TodoCommand.cs" />
     <Compile Include="Coordination\TransmitModelCommand.cs" />
     <Compile Include="Detail\DetailLibrary.cs" />
+    <Compile Include="Detail\DetailMain.cs" />
     <Compile Include="Detail\TotalLineLengthCommand.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -70,6 +73,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RHTRibbonPanelSetting.cs" />
     <Compile Include="SharedParameters\LoadToFamilyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +89,7 @@
       <DependentUpon>LoadToProjectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SharedParameters\SharedParametersLibrary.cs" />
+    <Compile Include="SharedParameters\SharedParametersMain.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\add_img_32x32.png" />
