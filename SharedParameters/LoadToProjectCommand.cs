@@ -22,10 +22,14 @@ namespace RevitHandyTools.SharedParameters
             Autodesk.Revit.ApplicationServices.Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
-            DialogResult dialogresult = MessageBox.Show("This will overwrite parameters that have the same name. " +
-            " Would you like to to preceed?", "Add shared parameters to project", MessageBoxButtons.YesNo);
+            LoadWarningForm loadWarningForm = new LoadWarningForm();
+            loadWarningForm.ShowDialog();
 
-            if (dialogresult == DialogResult.Yes)
+            //DialogResult dialogresult = MessageBox.Show("This will overwrite parameters that have the same name. " +
+            //" Would you like to to preceed?", "Add shared parameters to project", MessageBoxButtons.YesNo);
+
+            //if (dialogresult == DialogResult.Yes)
+            if (loadWarningForm.DialogResult == DialogResult.Yes)
             {
                 try
                 {

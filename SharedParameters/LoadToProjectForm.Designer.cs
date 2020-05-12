@@ -52,10 +52,12 @@
             // 
             this.ParameterBinding.Controls.Add(this.InstanceCheck);
             this.ParameterBinding.Controls.Add(this.TypeCheck);
-            this.ParameterBinding.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ParameterBinding.Location = new System.Drawing.Point(340, 101);
+            this.ParameterBinding.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParameterBinding.Location = new System.Drawing.Point(302, 112);
+            this.ParameterBinding.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ParameterBinding.Name = "ParameterBinding";
-            this.ParameterBinding.Size = new System.Drawing.Size(307, 98);
+            this.ParameterBinding.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ParameterBinding.Size = new System.Drawing.Size(273, 109);
             this.ParameterBinding.TabIndex = 21;
             this.ParameterBinding.TabStop = false;
             this.ParameterBinding.Text = "Parameter Binding";
@@ -63,9 +65,11 @@
             // InstanceCheck
             // 
             this.InstanceCheck.AutoSize = true;
-            this.InstanceCheck.Location = new System.Drawing.Point(20, 61);
+            this.InstanceCheck.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InstanceCheck.Location = new System.Drawing.Point(18, 68);
+            this.InstanceCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.InstanceCheck.Name = "InstanceCheck";
-            this.InstanceCheck.Size = new System.Drawing.Size(84, 22);
+            this.InstanceCheck.Size = new System.Drawing.Size(77, 24);
             this.InstanceCheck.TabIndex = 1;
             this.InstanceCheck.Text = "Instance";
             this.InstanceCheck.UseVisualStyleBackColor = true;
@@ -74,9 +78,11 @@
             // TypeCheck
             // 
             this.TypeCheck.AutoSize = true;
-            this.TypeCheck.Location = new System.Drawing.Point(20, 32);
+            this.TypeCheck.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TypeCheck.Location = new System.Drawing.Point(18, 35);
+            this.TypeCheck.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TypeCheck.Name = "TypeCheck";
-            this.TypeCheck.Size = new System.Drawing.Size(60, 22);
+            this.TypeCheck.Size = new System.Drawing.Size(58, 24);
             this.TypeCheck.TabIndex = 0;
             this.TypeCheck.Text = "Type";
             this.TypeCheck.UseVisualStyleBackColor = true;
@@ -86,10 +92,11 @@
             // 
             this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.CancelButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CancelButton.Location = new System.Drawing.Point(489, 534);
+            this.CancelButton.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CancelButton.Location = new System.Drawing.Point(448, 595);
+            this.CancelButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(142, 29);
+            this.CancelButton.Size = new System.Drawing.Size(126, 32);
             this.CancelButton.TabIndex = 20;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
@@ -99,10 +106,12 @@
             // 
             this.GroupParameterUnder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.GroupParameterUnder.Controls.Add(this.GroupParameterUnderComboBox);
-            this.GroupParameterUnder.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GroupParameterUnder.Location = new System.Drawing.Point(340, 16);
+            this.GroupParameterUnder.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GroupParameterUnder.Location = new System.Drawing.Point(302, 18);
+            this.GroupParameterUnder.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GroupParameterUnder.Name = "GroupParameterUnder";
-            this.GroupParameterUnder.Size = new System.Drawing.Size(307, 70);
+            this.GroupParameterUnder.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.GroupParameterUnder.Size = new System.Drawing.Size(273, 78);
             this.GroupParameterUnder.TabIndex = 19;
             this.GroupParameterUnder.TabStop = false;
             this.GroupParameterUnder.Text = "Group Parameter Under";
@@ -113,10 +122,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GroupParameterUnderComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.GroupParameterUnderComboBox.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GroupParameterUnderComboBox.FormattingEnabled = true;
-            this.GroupParameterUnderComboBox.Location = new System.Drawing.Point(20, 31);
+            this.GroupParameterUnderComboBox.Location = new System.Drawing.Point(18, 34);
+            this.GroupParameterUnderComboBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GroupParameterUnderComboBox.Name = "GroupParameterUnderComboBox";
-            this.GroupParameterUnderComboBox.Size = new System.Drawing.Size(271, 26);
+            this.GroupParameterUnderComboBox.Size = new System.Drawing.Size(241, 28);
             this.GroupParameterUnderComboBox.TabIndex = 0;
             // 
             // CategoryList
@@ -124,10 +135,12 @@
             this.CategoryList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.CategoryList.Controls.Add(this.CategoryCheckList);
-            this.CategoryList.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CategoryList.Location = new System.Drawing.Point(340, 205);
+            this.CategoryList.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CategoryList.Location = new System.Drawing.Point(302, 228);
+            this.CategoryList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.CategoryList.Name = "CategoryList";
-            this.CategoryList.Size = new System.Drawing.Size(307, 313);
+            this.CategoryList.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.CategoryList.Size = new System.Drawing.Size(273, 348);
             this.CategoryList.TabIndex = 18;
             this.CategoryList.TabStop = false;
             this.CategoryList.Text = "Category List";
@@ -136,14 +149,14 @@
             // 
             this.CategoryCheckList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.CategoryCheckList.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CategoryCheckList.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CategoryCheckList.FormattingEnabled = true;
             this.CategoryCheckList.HorizontalScrollbar = true;
-            this.CategoryCheckList.Location = new System.Drawing.Point(20, 32);
-            this.CategoryCheckList.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.CategoryCheckList.Location = new System.Drawing.Point(18, 35);
+            this.CategoryCheckList.Margin = new System.Windows.Forms.Padding(9, 6, 9, 6);
             this.CategoryCheckList.Name = "CategoryCheckList";
             this.CategoryCheckList.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.CategoryCheckList.Size = new System.Drawing.Size(272, 256);
+            this.CategoryCheckList.Size = new System.Drawing.Size(242, 256);
             this.CategoryCheckList.TabIndex = 7;
             // 
             // SharedParameterList
@@ -152,10 +165,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SharedParameterList.Controls.Add(this.ParameterList);
-            this.SharedParameterList.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SharedParameterList.Location = new System.Drawing.Point(12, 101);
+            this.SharedParameterList.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SharedParameterList.Location = new System.Drawing.Point(11, 112);
+            this.SharedParameterList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.SharedParameterList.Name = "SharedParameterList";
-            this.SharedParameterList.Size = new System.Drawing.Size(311, 418);
+            this.SharedParameterList.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.SharedParameterList.Size = new System.Drawing.Size(276, 465);
             this.SharedParameterList.TabIndex = 17;
             this.SharedParameterList.TabStop = false;
             this.SharedParameterList.Text = "Shared Parameter List";
@@ -165,16 +180,16 @@
             this.ParameterList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ParameterList.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ParameterList.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ParameterList.FormattingEnabled = true;
             this.ParameterList.HorizontalScrollbar = true;
-            this.ParameterList.ItemHeight = 18;
-            this.ParameterList.Location = new System.Drawing.Point(16, 32);
-            this.ParameterList.Margin = new System.Windows.Forms.Padding(5);
+            this.ParameterList.ItemHeight = 20;
+            this.ParameterList.Location = new System.Drawing.Point(14, 35);
+            this.ParameterList.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.ParameterList.Name = "ParameterList";
             this.ParameterList.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ParameterList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.ParameterList.Size = new System.Drawing.Size(280, 364);
+            this.ParameterList.Size = new System.Drawing.Size(249, 404);
             this.ParameterList.Sorted = true;
             this.ParameterList.TabIndex = 2;
             // 
@@ -183,10 +198,12 @@
             this.SharedParameterGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.SharedParameterGroup.Controls.Add(this.GroupSelectComboBox);
-            this.SharedParameterGroup.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SharedParameterGroup.Location = new System.Drawing.Point(12, 16);
+            this.SharedParameterGroup.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SharedParameterGroup.Location = new System.Drawing.Point(11, 18);
+            this.SharedParameterGroup.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.SharedParameterGroup.Name = "SharedParameterGroup";
-            this.SharedParameterGroup.Size = new System.Drawing.Size(311, 71);
+            this.SharedParameterGroup.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.SharedParameterGroup.Size = new System.Drawing.Size(276, 79);
             this.SharedParameterGroup.TabIndex = 16;
             this.SharedParameterGroup.TabStop = false;
             this.SharedParameterGroup.Text = "Select Shared Parameter Group";
@@ -197,22 +214,23 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.GroupSelectComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.GroupSelectComboBox.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GroupSelectComboBox.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.GroupSelectComboBox.FormattingEnabled = true;
-            this.GroupSelectComboBox.Location = new System.Drawing.Point(16, 31);
-            this.GroupSelectComboBox.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
+            this.GroupSelectComboBox.Location = new System.Drawing.Point(14, 34);
+            this.GroupSelectComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 3, 4);
             this.GroupSelectComboBox.Name = "GroupSelectComboBox";
-            this.GroupSelectComboBox.Size = new System.Drawing.Size(276, 26);
+            this.GroupSelectComboBox.Size = new System.Drawing.Size(246, 28);
             this.GroupSelectComboBox.TabIndex = 5;
             this.GroupSelectComboBox.SelectedIndexChanged += new System.EventHandler(this.GroupSelectComboBox_SelectedIndexChanged);
             // 
             // AddButton
             // 
             this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddButton.Location = new System.Drawing.Point(303, 534);
+            this.AddButton.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddButton.Location = new System.Drawing.Point(282, 595);
+            this.AddButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(171, 30);
+            this.AddButton.Size = new System.Drawing.Size(152, 33);
             this.AddButton.TabIndex = 15;
             this.AddButton.Text = "Add Parameter";
             this.AddButton.UseVisualStyleBackColor = true;
@@ -221,10 +239,10 @@
             // LoadToProjectForm
             // 
             this.AcceptButton = this.AddButton;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(659, 581);
+            this.ClientSize = new System.Drawing.Size(586, 646);
             this.Controls.Add(this.ParameterBinding);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.GroupParameterUnder);
@@ -232,12 +250,14 @@
             this.Controls.Add(this.SharedParameterList);
             this.Controls.Add(this.SharedParameterGroup);
             this.Controls.Add(this.AddButton);
-            this.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "LoadToProjectForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Load To Project";
             this.ParameterBinding.ResumeLayout(false);
             this.ParameterBinding.PerformLayout();

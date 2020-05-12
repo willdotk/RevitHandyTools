@@ -16,6 +16,7 @@ namespace RevitHandyTools.Detail
 
             RibbonPanel detailPanel = RHTRibbonPanelSetting.ribbonPanel(uIControlledApplication, "Detail");
 
+            // TotalLineLength
             // Icon made by Good Ware from www.flaticon.com
             PushButton totalLineLengthPushbutton = detailPanel.AddItem(new PushButtonData("TotalLineLength", "Total Length", thisAssemblyPath, "RevitHandyTools.Detail.TotalLineLengthCommand")) as PushButton;
             totalLineLengthPushbutton.ToolTip = "To add up total length of selected detail lines.";

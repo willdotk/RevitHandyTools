@@ -88,6 +88,12 @@
     <Compile Include="SharedParameters\LoadToProjectForm.Designer.cs">
       <DependentUpon>LoadToProjectForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SharedParameters\LoadWarningForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SharedParameters\LoadWarningForm.Designer.cs">
+      <DependentUpon>LoadWarningForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SharedParameters\SharedParametersLibrary.cs" />
     <Compile Include="SharedParameters\SharedParametersMain.cs" />
   </ItemGroup>
@@ -95,7 +101,11 @@
     <EmbeddedResource Include="Resources\add_img_32x32.png" />
     <EmbeddedResource Include="Resources\measurement_img_32x32.png" />
     <EmbeddedResource Include="Resources\packing_img_32x32.png" />
+    <None Include="Resources\warning_img_75x75.png" />
     <Content Include="RevitHandyTools.addin" />
+    <EmbeddedResource Include="SharedParameters\LoadWarningForm.resx">
+      <DependentUpon>LoadWarningForm.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
