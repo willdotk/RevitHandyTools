@@ -14,13 +14,13 @@ namespace RevitHandyTools.Detail
         {
             string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
 
-            RibbonPanel detailPanel = RHTRibbonPanelSetting.ribbonPanel(uIControlledApplication, "Detail");
+            RibbonPanel detailPanel = RibbonPanelSetting.ribbonPanel(uIControlledApplication, "Detail");
 
             // TotalLineLength
             // Icon made by Good Ware from www.flaticon.com
             PushButton totalLineLengthPushbutton = detailPanel.AddItem(new PushButtonData("TotalLineLength", "Total Length", thisAssemblyPath, "RevitHandyTools.Detail.TotalLineLengthCommand")) as PushButton;
             totalLineLengthPushbutton.ToolTip = "To add up total length of selected detail lines.";
-            totalLineLengthPushbutton.LargeImage = RHTRibbonPanelSetting.GetEmbeddedImage("RevitHandyTools.Resources.measurement_img_32x32.png");
+            totalLineLengthPushbutton.LargeImage = RibbonPanelSetting.GetEmbeddedImage("RevitHandyTools.Resources.measurement_img_32x32.png");
 
         }
 

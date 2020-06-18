@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 
 namespace RevitHandyTools
 {
-    class RHTRibbonPanelSetting
+    class RibbonPanelSetting
     {        
         public static RibbonPanel ribbonPanel(UIControlledApplication uIControlledApplication, string panelName)
         {

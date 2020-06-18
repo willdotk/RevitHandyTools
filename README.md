@@ -1,9 +1,9 @@
 # RevitHandyTools
-Handy Revit tools using Revit API and practicing c#
+Handy tools to use Revit quick and easy.
 
 <h2>Coordination Panel</h2>
 <ul>
-    <li>Model Transmit - To clean up the current project for model transmit.</li>
+    <li>Model Transmit - To clean up the current and prepare for model transmit.</li>
 </ul>
 
 <h2>Detail Panel</h2>
@@ -13,6 +13,6 @@ Handy Revit tools using Revit API and practicing c#
 
 <h2>Shared Parameters Panel</h2>
 <ul>
-    <li>Load To Project - To add multiple shared parameters to multiple categories within a project</li>
-    <li>LoadToFamily - To add multiple shared parameters to a family</li>
+    <li>Load To Project - To load multiple shared parameters into multiple categories within a project</li>
+    <li>Load To Family - To load multiple shared parameters into a family</li>
 </ul>

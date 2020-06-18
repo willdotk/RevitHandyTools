@@ -22,7 +22,57 @@ namespace RevitHandyTools.Coordination
             Autodesk.Revit.ApplicationServices.Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
+            // To add shared parameter
+            //Dictionary<ExternalDefinition, Dictionary<string, string>> sharedParamDict = new SharedParametersLibrary(doc, app).GetSharedParamDict();
+            //CategorySet categoryset = app.Create.NewCategorySet();
+            //Category category = Category.GetCategory(doc, BuiltInCategory.OST_Walls);
+            //categoryset.Insert(category);
+
+            Selection selWall = uiapp.ActiveUIDocument.Selection;
+
+
+            FilteredElementCollector wallCollector = new FilteredElementCollector(doc);
+            wallCollector.OfClass(typeof(WallType));
+
+            foreach (var el in wallCollector)
+            {
+
+                //TaskDialog.Show("Test", el.Name.ToString());
+
+                if (el.Name == "Wall_190BW")
+                {
+                    
+                    //string parameterValue = el.GetParameters("Location").ToString();
+                    
+                    //TaskDialog.Show("Parameter value", parameterValue);
+
+                    TaskDialog debugDialog = new TaskDialog("Debug Dialog");
+                    debugDialog.MainContent = el.GetParameters("Location").GetType().ToString();
+                    debugDialog.Show();
+                }
+
+                //IList<Parameter> parameterText = el.GetParameters("RHT_Todos_Text");
+                //foreach (var i in el.Parameters)
+                //{
+                //    TaskDialog.Show("Done", i.);
+                //}
+
+
+                //Parameter parameter = el.LookupParameter("RHT_Todos");
+                //Parameter parameterText = el.LookupParameter("RHT_Todos_Text");
+                //TaskDialog.Show("Parameter", parameterText.Definition.ToString());
+                //TaskDialog.Show("Parameter", parameterText.AsValueString());
+                //using (Transaction tx = new Transaction(doc))
+                //{
+                //    tx.Start("Todo");
+                //    parameterText.SetValueString("Test string from RHT");
+                //    tx.Commit();
+                //}
+                //TaskDialog.Show("Parameter", parameterText.AsValueString());
+            }
+
             return Result.Succeeded;            
         }
+
     }
 }

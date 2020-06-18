@@ -14,12 +14,12 @@ namespace RevitHandyTools.Coordination
         {
             string thisAssemblyPath = Assembly.GetExecutingAssembly().Location;
 
-            RibbonPanel coordinationPanel = RHTRibbonPanelSetting.ribbonPanel(uIControlledApplication, "Coordination");
+            RibbonPanel coordinationPanel = RibbonPanelSetting.ribbonPanel(uIControlledApplication, "Coordination");
 
             // Icon made by Freepik from www.flaticon.com
             PushButton transmitModelPushbutton = coordinationPanel.AddItem(new PushButtonData("TransmitModel", "Model Transmit", thisAssemblyPath, "RevitHandyTools.Coordination.TransmitModelCommand")) as PushButton;
             transmitModelPushbutton.ToolTip = "To clean up the current project for model transmit.";
-            transmitModelPushbutton.LargeImage = RHTRibbonPanelSetting.GetEmbeddedImage("RevitHandyTools.Resources.packing_img_32x32.png");
+            transmitModelPushbutton.LargeImage = RibbonPanelSetting.GetEmbeddedImage("RevitHandyTools.Resources.packing_img_32x32.png");
         }
     }
 }
