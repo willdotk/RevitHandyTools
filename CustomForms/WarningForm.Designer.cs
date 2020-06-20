@@ -1,6 +1,6 @@
-﻿namespace RevitHandyTools.SharedParameters
+﻿namespace RevitHandyTools.CustomForms
 {
-    partial class LoadWarningForm
+    partial class WarningForm
     {
         /// <summary>
         /// Required designer variable.
@@ -92,7 +92,7 @@
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
-            // LoadWarningForm
+            // Warning
             // 
             this.AcceptButton = this.LoadYes;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -106,7 +106,7 @@
             this.Controls.Add(this.WarningLabel1);
             this.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "LoadWarningForm";
+            this.Name = "Warning";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -83,16 +83,21 @@ namespace RevitHandyTools.Coordination
             }
             #endregion
 
-            DialogResult dialogresult = MessageBox.Show("This will remove critical settings of the project." +
-                " Please make sure you run this extension in a coordiantion model." + " Do you want to preceed?",
-                "Cleaning Project for Model Transmit" , MessageBoxButtons.YesNo);
 
-            if (dialogresult == DialogResult.Yes && uidoc.ActiveView.Name.StartsWith("{3D"))
+            CustomForms.WarningForm warningTransmit = new CustomForms.WarningForm();
+            warningTransmit.WarningLabel = String.Format("{0} {1} {2}", "This will remove critical settings of the project.",
+                "Please make sure you run this extension in a coordiantion model.", "Do you want to preceed?");
+            warningTransmit.ShowDialog();
+
+            //DialogResult dialogresult = MessageBox.Show("This will remove critical settings of the project." +
+            //    " Please make sure you run this extension in a coordiantion model." + " Do you want to preceed?",
+            //    "Cleaning Project for Model Transmit" , MessageBoxButtons.YesNo);
+
+            if (warningTransmit.DialogResult == DialogResult.Yes && uidoc.ActiveView.Name.StartsWith("{3D"))
             {
                 ClaningProject();
-
             }
-            else if(dialogresult == DialogResult.Yes && !uidoc.ActiveView.Name.StartsWith("{3D"))
+            else if (warningTransmit.DialogResult == DialogResult.Yes && !uidoc.ActiveView.Name.StartsWith("{3D"))
             {
                 TaskDialog.Show("Reivt", "You will move to 3D view now. Please run this extension after moving to 3D view.");
                 #region
@@ -107,12 +112,36 @@ namespace RevitHandyTools.Coordination
             }
             else
             {
-
+                return Result.Succeeded;
             }
+
+
+            //if (dialogresult == DialogResult.Yes && uidoc.ActiveView.Name.StartsWith("{3D"))
+            //{
+            //    ClaningProject();
+
+            //}
+            //else if(dialogresult == DialogResult.Yes && !uidoc.ActiveView.Name.StartsWith("{3D"))
+            //{
+            //    TaskDialog.Show("Reivt", "You will move to 3D view now. Please run this extension after moving to 3D view.");
+            //    #region
+            //    RevitCommandId threeDViewcommandId = RevitCommandId.LookupPostableCommandId(PostableCommand.Default3DView);
+
+            //    if (commandData.Application.CanPostCommand(threeDViewcommandId))
+            //    {
+            //        commandData.Application.PostCommand(threeDViewcommandId);
+            //    }
+            //    #endregion
+            //    //ClaningProject();
+            //}
+            //else
+            //{
+
+            //}
 
             using (Transaction tx = new Transaction(doc))
             {
-                tx.Start("Cleaning up a project for transmit");
+                tx.Start("Cleaning up a project for model transmit");
                 doc.Delete(viewTemplateIdCollection);
                 tx.Commit();
             }

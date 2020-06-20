@@ -63,6 +63,12 @@
     <Compile Include="Coordination\CoordinationMain.cs" />
     <Compile Include="Coordination\TodoCommand.cs" />
     <Compile Include="Coordination\TransmitModelCommand.cs" />
+    <Compile Include="CustomForms\WarningForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomForms\WarningForm.Designer.cs">
+      <DependentUpon>WarningForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Detail\DetailLibrary.cs" />
     <Compile Include="Detail\DetailMain.cs" />
     <Compile Include="Detail\TotalLineLengthCommand.cs" />
@@ -73,7 +79,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RHTRibbonPanelSetting.cs" />
+    <Compile Include="RibbonPanelSetting.cs" />
     <Compile Include="SharedParameters\LoadToFamilyForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,24 +94,18 @@
     <Compile Include="SharedParameters\LoadToProjectForm.Designer.cs">
       <DependentUpon>LoadToProjectForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SharedParameters\LoadWarningForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SharedParameters\LoadWarningForm.Designer.cs">
-      <DependentUpon>LoadWarningForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="SharedParameters\SharedParametersLibrary.cs" />
     <Compile Include="SharedParameters\SharedParametersMain.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CustomForms\WarningForm.resx">
+      <DependentUpon>WarningForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\add_img_32x32.png" />
     <EmbeddedResource Include="Resources\measurement_img_32x32.png" />
     <EmbeddedResource Include="Resources\packing_img_32x32.png" />
     <None Include="Resources\warning_img_75x75.png" />
     <Content Include="RevitHandyTools.addin" />
-    <EmbeddedResource Include="SharedParameters\LoadWarningForm.resx">
-      <DependentUpon>LoadWarningForm.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -122,6 +122,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RevitHandyTools.SharedParameters
+namespace RevitHandyTools.CustomForms
 {
-    public partial class LoadWarningForm : Form
+    public partial class WarningForm : Form
     {
-        public LoadWarningForm()
+        public WarningForm()
         {
             InitializeComponent();
         }
@@ -29,6 +29,18 @@ namespace RevitHandyTools.SharedParameters
         private void LoadYes_Click(object sender, EventArgs e)
         {
             
+        }
+
+        public string WarningLabel
+        {
+            get
+            {
+                return this.WarningLabel1.Text;
+            }
+            set
+            {
+                this.WarningLabel1.Text = value;
+            }
         }
     }
 }

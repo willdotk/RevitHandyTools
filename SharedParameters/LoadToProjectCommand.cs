@@ -5,6 +5,7 @@ using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using System.Windows.Forms;
+using RevitHandyTools;
 #endregion
 
 namespace RevitHandyTools.SharedParameters
@@ -22,7 +23,8 @@ namespace RevitHandyTools.SharedParameters
             Autodesk.Revit.ApplicationServices.Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
-            LoadWarningForm loadWarningForm = new LoadWarningForm();
+            CustomForms.WarningForm loadWarningForm = new CustomForms.WarningForm();
+            loadWarningForm.WarningLabel = "This will overwrite any parameters with the same names.";
             loadWarningForm.ShowDialog();
 
             //DialogResult dialogresult = MessageBox.Show("This will overwrite parameters that have the same name. " +
