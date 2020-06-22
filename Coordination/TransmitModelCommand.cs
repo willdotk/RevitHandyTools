@@ -85,13 +85,9 @@ namespace RevitHandyTools.Coordination
 
 
             CustomForms.WarningForm warningTransmit = new CustomForms.WarningForm();
-            warningTransmit.WarningLabel = String.Format("{0} {1} {2}", "This will remove critical settings of the project.",
-                "Please make sure you run this extension in a coordiantion model.", "Do you want to preceed?");
+            warningTransmit.WarningLabel = String.Format("{0} {1}", "This will remove critical settings of the project.",
+                "Please make sure you run this extension in a coordiantion model.");
             warningTransmit.ShowDialog();
-
-            //DialogResult dialogresult = MessageBox.Show("This will remove critical settings of the project." +
-            //    " Please make sure you run this extension in a coordiantion model." + " Do you want to preceed?",
-            //    "Cleaning Project for Model Transmit" , MessageBoxButtons.YesNo);
 
             if (warningTransmit.DialogResult == DialogResult.Yes && uidoc.ActiveView.Name.StartsWith("{3D"))
             {
@@ -114,30 +110,6 @@ namespace RevitHandyTools.Coordination
             {
                 return Result.Succeeded;
             }
-
-
-            //if (dialogresult == DialogResult.Yes && uidoc.ActiveView.Name.StartsWith("{3D"))
-            //{
-            //    ClaningProject();
-
-            //}
-            //else if(dialogresult == DialogResult.Yes && !uidoc.ActiveView.Name.StartsWith("{3D"))
-            //{
-            //    TaskDialog.Show("Reivt", "You will move to 3D view now. Please run this extension after moving to 3D view.");
-            //    #region
-            //    RevitCommandId threeDViewcommandId = RevitCommandId.LookupPostableCommandId(PostableCommand.Default3DView);
-
-            //    if (commandData.Application.CanPostCommand(threeDViewcommandId))
-            //    {
-            //        commandData.Application.PostCommand(threeDViewcommandId);
-            //    }
-            //    #endregion
-            //    //ClaningProject();
-            //}
-            //else
-            //{
-
-            //}
 
             using (Transaction tx = new Transaction(doc))
             {

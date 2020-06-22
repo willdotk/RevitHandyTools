@@ -42,6 +42,7 @@
             this.WarningLabel1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.WarningLabel1.Location = new System.Drawing.Point(128, 34);
             this.WarningLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.WarningLabel1.MaximumSize = new System.Drawing.Size(400, 0);
             this.WarningLabel1.Name = "WarningLabel1";
             this.WarningLabel1.Size = new System.Drawing.Size(342, 20);
             this.WarningLabel1.TabIndex = 1;
@@ -51,18 +52,18 @@
             // 
             this.WarningLabel2.AutoSize = true;
             this.WarningLabel2.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.WarningLabel2.Location = new System.Drawing.Point(128, 57);
+            this.WarningLabel2.Location = new System.Drawing.Point(128, 90);
             this.WarningLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.WarningLabel2.Name = "WarningLabel2";
-            this.WarningLabel2.Size = new System.Drawing.Size(194, 20);
+            this.WarningLabel2.Size = new System.Drawing.Size(174, 20);
             this.WarningLabel2.TabIndex = 2;
-            this.WarningLabel2.Text = " Would you like to to preceed?";
+            this.WarningLabel2.Text = "Do you want to to preceed?";
             // 
             // LoadYes
             // 
             this.LoadYes.DialogResult = System.Windows.Forms.DialogResult.Yes;
             this.LoadYes.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoadYes.Location = new System.Drawing.Point(251, 105);
+            this.LoadYes.Location = new System.Drawing.Point(342, 120);
             this.LoadYes.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.LoadYes.Name = "LoadYes";
             this.LoadYes.Size = new System.Drawing.Size(101, 29);
@@ -75,7 +76,7 @@
             // 
             this.LoadCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.LoadCancel.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LoadCancel.Location = new System.Drawing.Point(368, 105);
+            this.LoadCancel.Location = new System.Drawing.Point(459, 120);
             this.LoadCancel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.LoadCancel.Name = "LoadCancel";
             this.LoadCancel.Size = new System.Drawing.Size(101, 29);
@@ -92,13 +93,13 @@
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
-            // Warning
+            // WarningForm
             // 
             this.AcceptButton = this.LoadYes;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.LoadCancel;
-            this.ClientSize = new System.Drawing.Size(494, 146);
+            this.ClientSize = new System.Drawing.Size(584, 161);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LoadCancel);
             this.Controls.Add(this.LoadYes);
@@ -106,7 +107,7 @@
             this.Controls.Add(this.WarningLabel1);
             this.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "Warning";
+            this.Name = "WarningForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
