@@ -1,6 +1,7 @@
 ﻿#region Namespaces
 using System;
 using System.Collections.Generic;
+using System.Drawing.Text;
 using System.Windows.Forms;
 using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
@@ -24,16 +25,15 @@ namespace RevitHandyTools.Coordination
             Autodesk.Revit.ApplicationServices.Application app = uiapp.Application;
             Document doc = uidoc.Document;
 
-            ICollection<ElementId> viewTemplateIdCollection = new List<ElementId>();
+            ICollection<ElementId> viewIdCollection = new List<ElementId>();
 
             #region
-            void ClaningProject()
+            void SetCollectionToRemove()
             {
                 try
                 {
                     #region
-                    // To delete all view templates
-
+                    // To add all views to collection
                     FilteredElementCollector viewCollector = new FilteredElementCollector(doc);
                     viewCollector.OfClass(typeof(Autodesk.Revit.DB.View));
 
@@ -41,13 +41,13 @@ namespace RevitHandyTools.Coordination
                     {
                         if (v.ViewType.ToString() != "ProjectBrowser" && v.ViewType.ToString() != "SystemBrowser" && v.Name != "{3D}")
                         {
-                            viewTemplateIdCollection.Add(v.Id);
+                            viewIdCollection.Add(v.Id);
                         }
                     }
                     #endregion
 
                     #region
-                    // To delete all project parameters
+                    // To add all project parameters to collection
                     BindingMap bindingMap = doc.ParameterBindings;
 
                     FilteredElementCollector parameterElementCollector = new FilteredElementCollector(doc);
@@ -57,23 +57,13 @@ namespace RevitHandyTools.Coordination
                     {
                         if (bindingMap.Contains(parameterElement.GetDefinition()))
                         {
-                            viewTemplateIdCollection.Add(parameterElement.Id);
+                            viewIdCollection.Add(parameterElement.Id);
                         }
                     }
                     #endregion
 
-                    #region
-                    // To purge a project
-
-                    string s_commandToDisable = "ID_PURGE_UNUSED";
-                    RevitCommandId s_commandId = RevitCommandId.LookupCommandId(s_commandToDisable);
-
-
-                    uiapp.PostCommand(s_commandId);
-
-                    #endregion
-                
-                    TaskDialog.Show("Revit", "The current project is now ready for transmit");
+                    PurgeUnused();
+                    TaskDialog.Show("Revit Handy Tools - Model Transmit", "The project will be prepared for model transmit");
                 }
                 catch (Exception e)
                 {
@@ -83,19 +73,25 @@ namespace RevitHandyTools.Coordination
             }
             #endregion
 
+            void PurgeUnused()
+            {
+                // To purge a project
+                RevitCommandId commandId = RevitCommandId.LookupCommandId("ID_PURGE_UNUSED");
+                uiapp.PostCommand(commandId);
+            }
 
             CustomForms.WarningForm warningTransmit = new CustomForms.WarningForm();
-            warningTransmit.WarningLabel = String.Format("{0} {1}", "This will remove critical settings of the project.",
+            warningTransmit.WarningLabel = String.Format("{0}{1}", "This will remove critical settings of the project.\n",
                 "Please make sure you run this extension in a coordiantion model.");
             warningTransmit.ShowDialog();
 
             if (warningTransmit.DialogResult == DialogResult.Yes && uidoc.ActiveView.Name.StartsWith("{3D"))
             {
-                ClaningProject();
+                SetCollectionToRemove();
             }
             else if (warningTransmit.DialogResult == DialogResult.Yes && !uidoc.ActiveView.Name.StartsWith("{3D"))
             {
-                TaskDialog.Show("Reivt", "You will move to 3D view now. Please run this extension after moving to 3D view.");
+                TaskDialog.Show("Revit Handy Tools - Model Transmit", String.Format("{0}{1}", "Please run this extension in 3D view.\n", "You will be moved to 3D view."));
                 #region
                 RevitCommandId threeDViewcommandId = RevitCommandId.LookupPostableCommandId(PostableCommand.Default3DView);
 
@@ -104,7 +100,7 @@ namespace RevitHandyTools.Coordination
                     commandData.Application.PostCommand(threeDViewcommandId);
                 }
                 #endregion
-                //ClaningProject();
+                //SetCollectionToRemove();
             }
             else
             {
@@ -114,7 +110,9 @@ namespace RevitHandyTools.Coordination
             using (Transaction tx = new Transaction(doc))
             {
                 tx.Start("Cleaning up a project for model transmit");
-                doc.Delete(viewTemplateIdCollection);
+                
+                doc.Delete(viewIdCollection);
+
                 tx.Commit();
             }
 

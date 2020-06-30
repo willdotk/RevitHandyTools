@@ -18,7 +18,8 @@ namespace RevitHandyTools.Coordination
 
             // Icon made by Freepik from www.flaticon.com
             PushButton transmitModelPushbutton = coordinationPanel.AddItem(new PushButtonData("TransmitModel", "Model Transmit", thisAssemblyPath, "RevitHandyTools.Coordination.TransmitModelCommand")) as PushButton;
-            transmitModelPushbutton.ToolTip = "To clean up the current project for model transmit.";
+            transmitModelPushbutton.ToolTip = String.Format(
+                "{0}{1}","To clean up the current project for model transmit.\n","This feature is only available in 3D view");
             transmitModelPushbutton.LargeImage = RibbonPanelSetting.GetEmbeddedImage("RevitHandyTools.Resources.packing_img_32x32.png");
         }
     }
