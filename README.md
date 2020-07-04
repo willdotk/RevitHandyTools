@@ -3,7 +3,7 @@ Handy tools to use Revit quick and easy.
 
 <h2>Coordination Panel</h2>
 <ul>
-    <li>Model Transmit - To clean up the current and prepare for model transmit.</li>
+    <li>Model Transmit - To clean up the current project and prepare for model transmit.</li>
 </ul>
 
 <h2>Detail Panel</h2>

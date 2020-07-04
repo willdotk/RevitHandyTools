@@ -1,4 +1,5 @@
-﻿using Autodesk.Revit.UI;
+﻿using Autodesk.Revit.DB;
+using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +18,12 @@ namespace RevitHandyTools.Coordination
             RibbonPanel coordinationPanel = RibbonPanelSetting.ribbonPanel(uIControlledApplication, "Coordination");
 
             // Icon made by Freepik from www.flaticon.com
-            PushButton transmitModelPushbutton = coordinationPanel.AddItem(new PushButtonData("TransmitModel", "Model Transmit", thisAssemblyPath, "RevitHandyTools.Coordination.TransmitModelCommand")) as PushButton;
+            PushButtonData transmitModelPushbuttonData = new PushButtonData("TransmitModel", "Model Transmit", thisAssemblyPath, "RevitHandyTools.Coordination.TransmitModelCommand");
+            transmitModelPushbuttonData.AvailabilityClassName = "RevitHandyTools.AvailabilityThreeDimension";
+
+            PushButton transmitModelPushbutton = coordinationPanel.AddItem(transmitModelPushbuttonData) as PushButton;
             transmitModelPushbutton.ToolTip = String.Format(
-                "{0}{1}","To clean up the current project for model transmit.\n","This feature is only available in 3D view");
+                "{0}{1}","To clean up the current project for model transmit.\n","This feature is only available from 3D view");
             transmitModelPushbutton.LargeImage = RibbonPanelSetting.GetEmbeddedImage("RevitHandyTools.Resources.packing_img_32x32.png");
         }
     }

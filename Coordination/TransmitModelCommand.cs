@@ -37,9 +37,11 @@ namespace RevitHandyTools.Coordination
                     FilteredElementCollector viewCollector = new FilteredElementCollector(doc);
                     viewCollector.OfClass(typeof(Autodesk.Revit.DB.View));
 
+                    string activeViewName = uidoc.ActiveView.Name;
+
                     foreach (Autodesk.Revit.DB.View v in viewCollector)
                     {
-                        if (v.ViewType.ToString() != "ProjectBrowser" && v.ViewType.ToString() != "SystemBrowser" && v.Name != "{3D}")
+                        if (v.ViewType.ToString() != "ProjectBrowser" && v.ViewType.ToString() != "SystemBrowser" && v.Name != activeViewName)
                         {
                             viewIdCollection.Add(v.Id);
                         }
@@ -85,22 +87,9 @@ namespace RevitHandyTools.Coordination
                 "Please make sure you run this extension in a coordiantion model.");
             warningTransmit.ShowDialog();
 
-            if (warningTransmit.DialogResult == DialogResult.Yes && uidoc.ActiveView.Name.StartsWith("{3D"))
+            if (warningTransmit.DialogResult == DialogResult.Yes)
             {
                 SetCollectionToRemove();
-            }
-            else if (warningTransmit.DialogResult == DialogResult.Yes && !uidoc.ActiveView.Name.StartsWith("{3D"))
-            {
-                TaskDialog.Show("Revit Handy Tools - Model Transmit", String.Format("{0}{1}", "Please run this extension in 3D view.\n", "You will be moved to 3D view."));
-                #region
-                RevitCommandId threeDViewcommandId = RevitCommandId.LookupPostableCommandId(PostableCommand.Default3DView);
-
-                if (commandData.Application.CanPostCommand(threeDViewcommandId))
-                {
-                    commandData.Application.PostCommand(threeDViewcommandId);
-                }
-                #endregion
-                //SetCollectionToRemove();
             }
             else
             {
