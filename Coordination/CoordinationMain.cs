@@ -19,7 +19,7 @@ namespace RevitHandyTools.Coordination
 
             // Icon made by Freepik from www.flaticon.com
             PushButtonData transmitModelPushbuttonData = new PushButtonData("TransmitModel", "Model Transmit", thisAssemblyPath, "RevitHandyTools.Coordination.TransmitModelCommand");
-            transmitModelPushbuttonData.AvailabilityClassName = "RevitHandyTools.AvailabilityThreeDimension";
+            transmitModelPushbuttonData.AvailabilityClassName = "RevitHandyTools.AvailableInThreeDView";
 
             PushButton transmitModelPushbutton = coordinationPanel.AddItem(transmitModelPushbuttonData) as PushButton;
             transmitModelPushbutton.ToolTip = String.Format(

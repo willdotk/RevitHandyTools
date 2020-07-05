@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RevitHandyTools
 {
-    public class AvailabilityThreeDimension : IExternalCommandAvailability
+    public class AvailableInThreeDView : IExternalCommandAvailability
     {
         public bool IsCommandAvailable(UIApplication applicationData, CategorySet selectedCategories)
         {
@@ -22,6 +22,40 @@ namespace RevitHandyTools
             else
             {
                 return false;
+            }
+        }
+    }
+    public class AvailableInFamilyDocument : IExternalCommandAvailability
+    {
+        public bool IsCommandAvailable(UIApplication applicationData, CategorySet selectedCategories)
+        {
+            UIApplication uiapp = applicationData;
+            UIDocument uidoc = uiapp.ActiveUIDocument;
+
+            if (uidoc.Document.IsFamilyDocument)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
+    public class AvailableInProjectDocument : IExternalCommandAvailability
+    {
+        public bool IsCommandAvailable(UIApplication applicationData, CategorySet selectedCategories)
+        {
+            UIApplication uiapp = applicationData;
+            UIDocument uidoc = uiapp.ActiveUIDocument;
+
+            if (uidoc.Document.IsFamilyDocument)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
     }

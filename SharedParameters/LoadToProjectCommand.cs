@@ -27,10 +27,6 @@ namespace RevitHandyTools.SharedParameters
             loadWarningForm.WarningLabel = "This will overwrite any parameters with the same names.";
             loadWarningForm.ShowDialog();
 
-            //DialogResult dialogresult = MessageBox.Show("This will overwrite parameters that have the same name. " +
-            //" Would you like to to preceed?", "Add shared parameters to project", MessageBoxButtons.YesNo);
-
-            //if (dialogresult == DialogResult.Yes)
             if (loadWarningForm.DialogResult == DialogResult.Yes)
             {
                 try
