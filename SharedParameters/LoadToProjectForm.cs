@@ -40,7 +40,7 @@ namespace RevitHandyTools.SharedParameters
         {
             Dictionary<string, BuiltInParameterGroup> paramGroupUnderDict = new SharedParametersLibrary(doc,app).ParameterGroupUnderDict(doc);
             Dictionary<ExternalDefinition, Dictionary<string, string>> sharedParamDict = new SharedParametersLibrary(doc,app).GetSharedParamDict();
-            SortedList<string, Category> paramCategoryList = new SharedParametersLibrary(doc,app).ParameterCategoryList(doc);
+            SortedList<string, Category> parameterCategoryList = new SharedParametersLibrary(doc,app).ParameterCategoryList(doc);
 
             CategorySet categoryset = app.Create.NewCategorySet();
 
@@ -55,11 +55,11 @@ namespace RevitHandyTools.SharedParameters
                 }
             }
 
-            foreach (KeyValuePair<string, Category> k in paramCategoryList)
+            foreach (KeyValuePair<string, Category> k in parameterCategoryList)
             {
-                foreach (string catString in CategoryCheckList.CheckedItems)
+                foreach (string category in CategoryCheckList.CheckedItems)
                 {
-                    if (catString == k.Key)
+                    if (category == k.Key)
                     {
                         categoryset.Insert(k.Value);
                     }
@@ -67,36 +67,60 @@ namespace RevitHandyTools.SharedParameters
 
             }
 
-            using (Transaction tx = new Transaction(doc))
+
+
+            // =========================================
+            foreach (string selectedParameter in ParameterList.SelectedItems)
             {
-                tx.Start("Add Selected Shared Parameters");
-
-                foreach (string selectedParameter in ParameterList.SelectedItems)
+                foreach (var dictPair in sharedParamDict)
                 {
-                    foreach (var dictPair in sharedParamDict)
+                    foreach (var innerPair in dictPair.Value)
                     {
-                        foreach (var innerPair in dictPair.Value)
+                        if (innerPair.Key == selectedParameter)
                         {
-                            if (innerPair.Key == selectedParameter)
-                            {
-                                if (TypeCheck.Checked)
-                                {
-                                    TypeBinding newBinding = app.Create.NewTypeBinding(categoryset);
-                                    doc.ParameterBindings.ReInsert(dictPair.Key, newBinding, parameterGroupUnder);
-                                }
-                                else
-                                {
-                                    InstanceBinding newBinding = app.Create.NewInstanceBinding(categoryset);
-                                    doc.ParameterBindings.ReInsert(dictPair.Key, newBinding, parameterGroupUnder);
-
-                                }
-                            }
+                            
                         }
-
                     }
+
                 }
-                tx.Commit();
             }
+
+
+
+            // =========================================
+
+
+
+            //using (Transaction tx = new Transaction(doc))
+            //{
+            //    tx.Start("Add Selected Shared Parameters");
+
+            //    foreach (string selectedParameter in ParameterList.SelectedItems)
+            //    {
+            //        foreach (var dictPair in sharedParamDict)
+            //        {
+            //            foreach (var innerPair in dictPair.Value)
+            //            {
+            //                if (innerPair.Key == selectedParameter)
+            //                {
+            //                    if (TypeCheck.Checked)
+            //                    {
+            //                        TypeBinding newBinding = app.Create.NewTypeBinding(categoryset);
+            //                        doc.ParameterBindings.Insert(dictPair.Key, newBinding, parameterGroupUnder);
+            //                    }
+            //                    else
+            //                    {
+            //                        InstanceBinding newBinding = app.Create.NewInstanceBinding(categoryset);
+            //                        doc.ParameterBindings.Insert(dictPair.Key, newBinding, parameterGroupUnder);
+
+            //                    }
+            //                }
+            //            }
+
+            //        }
+            //    }
+            //    tx.Commit();
+            //}
         }
 
         private void GroupSelectComboBox_SelectedIndexChanged(object sender, EventArgs e)
