@@ -13,10 +13,12 @@ namespace RevitHandyTools.SharedParameters
     public partial class LoadToFamilyForm : System.Windows.Forms.Form
     {
         public DefinitionFile definitionfile = null;
-        public Object SelectedGroup = null;
 
         public Autodesk.Revit.ApplicationServices.Application app = null;
         public Document doc = null;
+
+        public object selectedGroup = null;
+        public object definitionGroup = null;
 
         public LoadToFamilyForm(Document document, Autodesk.Revit.ApplicationServices.Application application)
         {
@@ -27,32 +29,31 @@ namespace RevitHandyTools.SharedParameters
 
             definitionfile = app.OpenSharedParameterFile();
 
-            List<string> groupListDict = new SharedParametersLibrary(doc, app).GetGroupListFromDict();
-            Dictionary<string, BuiltInParameterGroup> paramGroupUnderDict = new SharedParametersLibrary(doc, app).ParameterGroupUnderDict(doc);
-            SortedList<string, Category> paramCategoryList = new SharedParametersLibrary(doc, app).ParameterCategoryList(doc);
+            List<string> groupList = new SharedParametersLibrary(doc, app).GetDefinitionGroupList();
+            Dictionary<string, BuiltInParameterGroup> builtInParameterGroupDictionary = new SharedParametersLibrary(doc, app).BuiltInParameterGroupDictionary(doc);
 
-            GroupSelectComboBox.Items.AddRange(groupListDict.ToArray());
+            GroupSelectComboBox.Items.AddRange(groupList.ToArray());
             ParameterList.Items.Add("Please select a group.");
-            GroupParameterUnderComboBox.Items.AddRange(paramGroupUnderDict.Keys.ToArray());
+            GroupParameterUnderComboBox.Items.AddRange(builtInParameterGroupDictionary.Keys.ToArray());
             InstanceCheck.Checked = true;
         }
 
         public void AddParametersToFamily(Document doc, Autodesk.Revit.ApplicationServices.Application app)
         {
-            Dictionary<string, BuiltInParameterGroup> paramGroupUnderDict = new SharedParametersLibrary(doc, app).ParameterGroupUnderDict(doc);
-            Dictionary<ExternalDefinition, Dictionary<string, string>> sharedParamDict = new SharedParametersLibrary(doc, app).GetSharedParamDict();
+            Dictionary<string, BuiltInParameterGroup> builtInParameterGroupDictionary = new SharedParametersLibrary(doc, app).BuiltInParameterGroupDictionary(doc);
+            SortedList<string, Category> parameterCategoryList = new SharedParametersLibrary(doc, app).ParameterCategoryList(doc);
+
+            selectedGroup = GroupParameterUnderComboBox.SelectedItem;
+            string selectedGroupName = selectedGroup.ToString();
+
+            definitionGroup = GroupSelectComboBox.SelectedItem;
+            string definitionGroupName = definitionGroup.ToString();
+
+            BuiltInParameterGroup builtInParameterGroup = builtInParameterGroupDictionary[selectedGroupName];
+
+            SortedList<string, ExternalDefinition> sharedParameterList = new SharedParametersLibrary(doc, app).GetSharedParameterList(definitionGroupName);
+
             FamilyManager familyManager = doc.FamilyManager;
-
-            BuiltInParameterGroup parameterGroupUnder = new BuiltInParameterGroup();
-            string selectedGroup = GroupParameterUnderComboBox.SelectedItem.ToString();
-
-            foreach (KeyValuePair<string, BuiltInParameterGroup> k in paramGroupUnderDict)
-            {
-                if (k.Key == selectedGroup)
-                {
-                    parameterGroupUnder = k.Value;
-                }
-            }
 
             using (Transaction tx = new Transaction(doc))
             {
@@ -60,23 +61,20 @@ namespace RevitHandyTools.SharedParameters
 
                 foreach (string selectedParameter in ParameterList.SelectedItems)
                 {
-                    foreach (var dictPair in sharedParamDict)
+                    if ((sharedParameterList.ContainsKey(selectedParameter)) && (TypeCheck.Checked))
                     {
-                        foreach (var innerPair in dictPair.Value)
-                        {
-                            if (innerPair.Key == selectedParameter)
-                            {
-                                if (TypeCheck.Checked)
-                                {
-                                    familyManager.AddParameter(dictPair.Key, parameterGroupUnder, false);
-                                }
-                                else
-                                {
-                                    familyManager.AddParameter(dictPair.Key, parameterGroupUnder, true);
-                                }
-                            }
-                        }
-
+                        ExternalDefinition externalDefinition =
+                            new SharedParametersLibrary(doc, app).ExternalDefinitionExtractor(selectedParameter, sharedParameterList);
+                        familyManager.AddParameter(externalDefinition, builtInParameterGroup, false);
+                    }
+                    else if ((sharedParameterList.ContainsKey(selectedParameter)) && (InstanceCheck.Checked))
+                    {
+                        ExternalDefinition externalDefinition =
+                            new SharedParametersLibrary(doc, app).ExternalDefinitionExtractor(selectedParameter, sharedParameterList);
+                        familyManager.AddParameter(externalDefinition, builtInParameterGroup, true);
+                    }
+                    else
+                    {
                     }
                 }
                 tx.Commit();
@@ -108,21 +106,15 @@ namespace RevitHandyTools.SharedParameters
 
         private void GroupSelectComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Dictionary<ExternalDefinition, Dictionary<string, string>> sharedParamDict = new SharedParametersLibrary(doc, app).GetSharedParamDict();
+            definitionGroup = GroupSelectComboBox.SelectedItem;
+            string definitionGroupName = definitionGroup.ToString();
+
+            SortedList<string, ExternalDefinition> sharedParameterList = new SharedParametersLibrary(doc, app).GetSharedParameterList(definitionGroupName);
 
             ParameterList.Items.Clear();
-            SelectedGroup = GroupSelectComboBox.SelectedItem;
-            string selGroup = SelectedGroup.ToString();
-
-            foreach (var dictPair in sharedParamDict)
+            foreach (KeyValuePair<string, ExternalDefinition> parameterKeyValue in sharedParameterList)
             {
-                foreach (var innerPair in dictPair.Value)
-                {
-                    if (innerPair.Value == selGroup)
-                    {
-                        ParameterList.Items.Add(innerPair.Key);
-                    }
-                }
+                ParameterList.Items.Add(parameterKeyValue.Key);
             }
         }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

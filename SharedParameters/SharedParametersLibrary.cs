@@ -43,33 +43,57 @@ namespace RevitHandyTools.SharedParameters
             return paramDict;
         }
 
-        public List<string> GetGroupListFromDict()
+        public SortedList<string, ExternalDefinition> GetSharedParameterList(string groupname)
         {
-            List<string> lst = new List<string>();
-            foreach (var dictPair in GetSharedParamDict())
+            SortedList<string, ExternalDefinition> sharedparameterlist = new SortedList<string, ExternalDefinition>();
+
+            foreach(DefinitionGroup definitionGroup in definitionfile.Groups)
             {
-                foreach (var innerPair in dictPair.Value)
+                if(definitionGroup.Name == groupname)
                 {
-                    if (!lst.Contains(innerPair.Value))
+                    foreach (Definition parameter in definitionGroup.Definitions)
                     {
-                        lst.Add(innerPair.Value);
+                        sharedparameterlist.Add(parameter.Name, parameter as ExternalDefinition);
                     }
                 }
             }
-            return lst;
+            return sharedparameterlist;
+        }
+
+        public ExternalDefinition ExternalDefinitionExtractor(string definitionName, SortedList<string, ExternalDefinition> sharedParameterList)
+        {
+            ExternalDefinition externalDefinition = null;
+
+            foreach(KeyValuePair<string, ExternalDefinition> parameterPair in sharedParameterList)
+            {
+                if(parameterPair.Key == definitionName)
+                {
+                    externalDefinition = parameterPair.Value;
+                }
+            }
+            return externalDefinition;
+        }
+
+        public List<string> GetDefinitionGroupList()
+        {
+            List<string> grouplist = new List<string>();
+            foreach (DefinitionGroup group in definitionfile.Groups)
+            {
+                grouplist.Add(group.Name);
+            }
+            return grouplist;
         }
 
         public SortedList<string, Category> ParameterCategoryList(Document doc)
         {
             Categories categories = doc.Settings.Categories;
-
             SortedList<string, Category> categoryList = new SortedList<string, Category>();
 
-            foreach (Category cat in categories)
+            foreach (Category category in categories)
             {
-                if (cat.AllowsBoundParameters)
+                if (category.AllowsBoundParameters)
                 {
-                    categoryList.Add(cat.Name, cat);
+                    categoryList.Add(category.Name, category);
                 }
             }
             return categoryList;
@@ -84,7 +108,7 @@ namespace RevitHandyTools.SharedParameters
             return groupString;
         }
 
-        public Dictionary<string, BuiltInParameterGroup> ParameterGroupUnderDict(Document doc)
+        public Dictionary<string, BuiltInParameterGroup> BuiltInParameterGroupDictionary(Document doc)
         {
             Dictionary<string, BuiltInParameterGroup> validGroups = new Dictionary<string, BuiltInParameterGroup>();
             validGroups.Add(FirstCharToUpper(BuiltInParameterGroup.PG_ANALYSIS_RESULTS.ToString()), BuiltInParameterGroup.PG_ANALYSIS_RESULTS);
