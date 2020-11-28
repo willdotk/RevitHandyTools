@@ -54,17 +54,40 @@ namespace RevitHandyTools.SharedParameters
             SortedList<string, ExternalDefinition> sharedParameterList = new SharedParametersLibrary(doc, app).GetSharedParameterList(definitionGroupName);
 
             CategorySet categoryset = app.Create.NewCategorySet();
-
             foreach (string category in CategoryCheckList.CheckedItems)
             {
                 categoryset.Insert(parameterCategoryList[category]);
+            }
+
+            // existing shared parameter list
+            List<string> collectorList = new List<string>();
+            List<string> existingParameterList = new List<string>();
+            List<string> nonExistingParameterList = new List<string>();
+            FilteredElementCollector parameterCollector = new FilteredElementCollector(doc);
+            parameterCollector.OfClass(typeof(SharedParameterElement));
+
+            foreach (var e in parameterCollector)
+            {
+                collectorList.Add(e.Name.ToString());
+            }
+
+            foreach(string parameter in ParameterList.SelectedItems)
+            {
+                if (collectorList.Contains(parameter))
+                {
+                    existingParameterList.Add(parameter);
+                }
+                else
+                {
+                    nonExistingParameterList.Add(parameter);
+                }
             }
 
             using (Transaction tx = new Transaction(doc))
             {
                 tx.Start("Add Selected Shared Parameters");
 
-                foreach (string selectedParameter in ParameterList.SelectedItems)
+                foreach (string selectedParameter in nonExistingParameterList)
                 {
                     if ((sharedParameterList.ContainsKey(selectedParameter)) && (TypeCheck.Checked))
                     {
@@ -79,6 +102,26 @@ namespace RevitHandyTools.SharedParameters
                             new SharedParametersLibrary(doc, app).ExternalDefinitionExtractor(selectedParameter, sharedParameterList);
                         InstanceBinding newBinding = app.Create.NewInstanceBinding(categoryset);
                         doc.ParameterBindings.Insert(externalDefinition, newBinding, builtInParameterGroup);
+                    }
+                    else
+                    {
+                    }
+                }
+                foreach (string selectedParameter in existingParameterList)
+                {
+                    if ((sharedParameterList.ContainsKey(selectedParameter)) && (TypeCheck.Checked))
+                    {
+                        ExternalDefinition externalDefinition =
+                            new SharedParametersLibrary(doc, app).ExternalDefinitionExtractor(selectedParameter, sharedParameterList);
+                        TypeBinding newBinding = app.Create.NewTypeBinding(categoryset);
+                        doc.ParameterBindings.ReInsert(externalDefinition, newBinding, builtInParameterGroup);
+                    }
+                    else if ((sharedParameterList.ContainsKey(selectedParameter)) && (InstanceCheck.Checked))
+                    {
+                        ExternalDefinition externalDefinition =
+                            new SharedParametersLibrary(doc, app).ExternalDefinitionExtractor(selectedParameter, sharedParameterList);
+                        InstanceBinding newBinding = app.Create.NewInstanceBinding(categoryset);
+                        doc.ParameterBindings.ReInsert(externalDefinition, newBinding, builtInParameterGroup);
                     }
                     else
                     {
